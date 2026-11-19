@@ -1,5 +1,6 @@
 ## Unreleased
 
+- Firmware package, component and font origins share one board-scoped source configuration; HA Panel uses the fork branch without changing other boards' official sources.
 - Added an experimental HA Panel profile (480 × 320 ST7796 SPI, FT6336 touch); physical display and touch acceptance is still pending.
 - Home Assistant's `zh-Hans` and `zh-Hant` locales now select the Simplified and Traditional Chinese translations; browser and saved regional codes `zh-CN` and `zh-TW` remain compatible.
 

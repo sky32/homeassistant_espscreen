@@ -24,7 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import profiles  # noqa: E402
 
 ROOT = profiles.ROOT
-REPO = 'https://github.com/MaxGramser/homeassistant_espscreen'
+sys.path.insert(0, str(ROOT / 'screen_manager/app'))
+from firmware_origins import repository_url, source_for  # noqa: E402
 
 
 def components(board):
@@ -45,6 +46,7 @@ def describe(board):
 
 def package_entry(board):
     file = profiles.CATALOG[board]['file']
+    repository, branch = source_for(board)
     return f'''# ESP Screens - the package a {describe(board)} builds from over GitHub. Written by tools/generate_entries.py
 # from boards.yaml; do not edit.
 #
@@ -55,8 +57,8 @@ def package_entry(board):
 substitutions:
   # The branch the components and the fonts come from: main, or dev for a screen of the app's dev channel, which
   # writes GITHUB_REF into the screen's own YAML next to the `ref:` of this package (docs/RELEASING.md, "Testing dev").
-  GITHUB_REF: "main"
-  FONT_DIR: "https://raw.githubusercontent.com/MaxGramser/homeassistant_espscreen/${{GITHUB_REF}}/fonts"
+  GITHUB_REF: "{branch}"
+  FONT_DIR: "https://raw.githubusercontent.com/{repository}/${{GITHUB_REF}}/fonts"
 
 packages:
   core: !include core.yaml
@@ -65,7 +67,7 @@ packages:
 external_components:
   - source:
       type: git
-      url: {REPO}.git
+      url: {repository_url(repository)}.git
       ref: ${{GITHUB_REF}}
       path: components
     refresh: 0s

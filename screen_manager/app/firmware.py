@@ -20,6 +20,7 @@ import build_memory
 import build_server
 from core import BOARD_KEYS, REF, REPO, SHAPES, channel, hotspot_name, installation_yaml, old_hotspot_name, our_ref, ref
 from i18n import t
+from firmware_origins import known_repository_url
 
 LOG = logging.getLogger('screen_manager')
 
@@ -66,12 +67,12 @@ def profile_meta(text):
         return value if isinstance(value, str) else None
     # 'screen': the profile pulls this project's board package, so it is one of ours (not any ESPHome device).
     packages = data.get('packages') if isinstance(data.get('packages'), dict) else {}
-    ours = any(isinstance(entry, dict) and REPO in str(entry.get('url', '')) for entry in packages.values())
+    ours = any(isinstance(entry, dict) and known_repository_url(entry.get('url')) for entry in packages.values())
     # The board package the profile builds from ("packages/guition.yaml"): what the screen looks like follows
     # from it (core.SHAPES), so the editor draws the right screen before it has ever been flashed.
     package = None
     for entry in packages.values():
-        if isinstance(entry, dict) and REPO in str(entry.get('url', '')):
+        if isinstance(entry, dict) and known_repository_url(entry.get('url')):
             files = entry.get('files')
             first = files[0] if isinstance(files, list) and files else files
             if isinstance(first, str):

@@ -9,6 +9,7 @@ import os
 import re
 import secrets
 
+from firmware_origins import DEFAULT_REF, repository_url, source_for
 from i18n import english, screen_t, t
 import calendar_feed
 import todo_feed
@@ -102,9 +103,10 @@ FULL_PAGE_MIN_FIRMWARE = (0, 2, 62)
 # Twenty tiles from firmware 0.2.7, ten before.
 TWENTY_TILES_MIN_FIRMWARE = (0, 2, 7)
 FIRST_MAX_TILES = 10
-REPO = 'https://github.com/MaxGramser/homeassistant_espscreen'
+
+REPO = repository_url()
 # The branch a screen's YAML builds its board package from. Which boards there are is boards.json's (BOARD_KEYS).
-REF = 'main'
+REF = DEFAULT_REF
 # The app's channel (docs/RELEASING.md, "Testing dev"): the branch of this repository the app was added from. The
 # Supervisor names an app `<hash>_<slug>`, the hash being the first eight characters of the sha1 of the repository URL
 # as it was added, in lower case (supervisor/store/utils.py, get_hash_from_repository). So the URL with `#dev` is
@@ -3137,6 +3139,7 @@ def installation_yaml(data):
     if not isinstance(friendly, str) or not friendly.strip() or len(friendly) > 60:
         raise ValueError(t('addon.errors.firmware.friendly_name'))
     quote = lambda s: json.dumps(s, ensure_ascii=False)
+    repository, branch = source_for(board, ref())
     # The language of the screen's texts (app 0.2.90): Settings -> Language & region, which ESP Screens passes in.
     language = data.get('language') if isinstance(data.get('language'), str) and re.fullmatch(r'[a-z]{2,3}(-[A-Za-z0-9]{2,8})?', data.get('language')) else 'en'
     # Which way the screen hangs (app 0.2.107). The board file already lays its panel out lying down, so only a
@@ -3177,9 +3180,8 @@ def installation_yaml(data):
     # Swipe between pages is on for a screen set up here: the line is the screen's start value until it stores a choice
     # of its own (packages/core.yaml, SWIPE_PAGES_DEFAULT). A profile written before has no line and keeps the core's off,
     # so an update never turns swiping on for a screen that is out there.
-    # The components and fonts come from the branch the board package does (packages/<key>.yaml), main unless the app
-    # runs in another channel.
-    branch_line = f'  GITHUB_REF: {quote(ref())}\n' if ref() != REF else ''
+    # Package, components and fonts share the board's configured origin and ref.
+    branch_line = f'  GITHUB_REF: {quote(branch)}\n' if branch != REF else ''
     # An OTA password, not yet `ota: encryption:` with the api key: ESPHome before 2026.9 refuses that, and the owner's
     # ESPHome Device Builder may still be older (docs/RELEASING.md, "ESPHome versions").
     key, ota = base64.b64encode(secrets.token_bytes(32)).decode(), secrets.token_urlsafe(24)
@@ -3211,8 +3213,8 @@ esphome:
 
 packages:
   display:
-    url: {REPO}
-    ref: {ref()}
+    url: {repository_url(repository)}
+    ref: {branch}
     files: [packages/{board}.yaml]
     refresh: 0s
   local_overrides: !include {name}.local.yaml

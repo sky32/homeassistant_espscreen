@@ -27,6 +27,21 @@ Both entries of every board are written from `boards.yaml` by `tools/generate_en
 fails when one is out of date), so neither is edited by hand. The old profiles in the root of the repository are gone
 (app 0.2.129); a build from a checkout names `checkout/<board>.yaml`.
 
+### Firmware origins (forks)
+
+`screen_manager/app/firmware_origins.py` is the shared source of GitHub repository and ref for Tessera's
+new-screen YAML and `tools/generate_entries.py`. `DEFAULT_REPOSITORY` and `DEFAULT_REF` keep the official defaults;
+`BOARD_SOURCES` overrides only named boards. The package URL, external component URL and raw `FONT_DIR` URL are
+derived from the same owner/repository; `GITHUB_REF` selects the same ref for components and fonts.
+
+After changing a source, run `python3 tools/generate_entries.py`, commit/push the generated package with the
+source change, and rebuild/redeploy Tessera. A local Python change cannot change a package already on GitHub.
+Existing screen YAML and keys are not rewritten: update its `packages.display.url`, `ref`, and any existing
+`substitutions.GITHUB_REF` together. Custom fork refs are not moved by official release-channel updates.
+Checkout entries still use local components and fonts. Other boards keep their official URLs unchanged.
+To move HA Panel to the fork's main, change its tuple's ref to `main`; after official support ships, remove its
+override entirely. Changing a source does not itself add translations or font glyphs.
+
 When a board selects a transport through an include such as `audio/${TRANSPORT}.yaml`,
 entry generation also discovers the sibling YAML variants' local components. This
 lets an override pick the other transport without editing generated entries. The

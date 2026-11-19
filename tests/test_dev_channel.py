@@ -108,7 +108,8 @@ class Channel(unittest.TestCase):
             if not isinstance(entry, dict) or 'external_components' not in entry:
                 continue
             with self.subTest(path.name):
-                self.assertEqual(entry['substitutions']['GITHUB_REF'], 'main')
+                from firmware_origins import source_for
+                self.assertEqual(entry['substitutions']['GITHUB_REF'], source_for(path.stem)[1])
                 self.assertEqual({source['source']['ref'] for source in entry['external_components']}, {'${GITHUB_REF}'})
                 if 'FONT_DIR' in entry['substitutions']:
                     self.assertIn('/${GITHUB_REF}/fonts', entry['substitutions']['FONT_DIR'])
