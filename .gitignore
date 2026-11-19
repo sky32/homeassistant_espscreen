@@ -55,3 +55,6 @@ packages/boards/lab-*.yaml
 /.claude/
 # Docker deployment secret; never commit a Home Assistant access token.
 /docker/ha_token
+/docker/compose.local.env
+/docker/esphome/
+/docker/data/

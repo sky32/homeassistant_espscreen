@@ -1,0 +1,25 @@
+# Build the Screen Manager from this local fork and keep its unauthenticated UI on this computer only.
+services:
+  esp-screens:
+    container_name: esp-screens-local
+    image: homeassistant-espscreen:fix-chinese-locale-aliases
+    build:
+      context: ../screen_manager
+    restart: unless-stopped
+    init: true
+    environment:
+      SCREEN_DEV: "1"
+      HA_API: ${HA_API:?Set HA_API in docker/compose.local.env}
+      HA_TOKEN_FILE: /run/secrets/ha_token
+      ESPHOME_CONFIG: /config
+      SCREEN_DATA: /data
+    secrets:
+      - ha_token
+    volumes:
+      - ./esphome:/config
+      - ./data:/data
+    network_mode: host
+
+secrets:
+  ha_token:
+    file: ./ha_token

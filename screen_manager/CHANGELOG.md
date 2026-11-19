@@ -1,5 +1,6 @@
 ## Unreleased
 
+- Added an experimental HA Panel profile (480 × 320 ST7796 SPI, FT6336 touch); physical display and touch acceptance is still pending.
 - Home Assistant's `zh-Hans` and `zh-Hant` locales now select the Simplified and Traditional Chinese translations; browser and saved regional codes `zh-CN` and `zh-TW` remain compatible.
 
 ## 0.4.99 (firmware 0.62.0)

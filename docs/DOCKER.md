@@ -206,3 +206,26 @@ screen would stay on dev.
 | `SCREEN_CAMERA_URL` | Optional: where screens load camera images, such as `http://192.168.1.20:8098`; by default Home Assistant's own LAN address |
 | `SCREEN_CAMERA_PORT` | Optional: the camera image port instead of 8098 |
 | `SCREEN_CHANNEL` | Optional: `main` or `dev`, the branch every screen builds from, which an app in Home Assistant knows from its repository URL. The `:dev` image sets `dev` itself. Without it, each screen keeps the `ref:` it has ("Testing dev") |
+
+## Build this fork locally on Docker Desktop
+
+To run an unpushed fork (including local translations and board profiles) instead of the published image:
+
+1. From the repository root, copy `docker/compose.local.env.example` to `docker/compose.local.env` and replace
+   `HA_API` with the BjHome address, for example `http://192.168.1.20:8124/api`.
+2. Create `docker/ha_token` with a Home Assistant long-lived access token from the test HA. Keep this file private;
+   it is ignored by Git. Create the local data folders with `mkdir -p docker/esphome docker/data`.
+3. Build and start the local image:
+
+   ```sh
+   docker compose --env-file docker/compose.local.env -f docker/compose.local.yaml up -d --build
+   ```
+
+4. Open `http://localhost:8099` on this computer. The app deliberately listens on loopback because the UI has no
+   login. On Docker Desktop, enable host networking in Docker Desktop settings for this local Compose profile; do not
+   expose 8099 to the LAN without an authenticated proxy.
+
+The local image runs this checkout's UI and board catalog. A screen already flashed with the `ha-panel-s3` profile can be
+paired manually through Home Assistant's ESPHome integration. Firmware package URLs remain on upstream by default;
+the private `ha-panel-s3` package is not published there, so do not use **New screen** or firmware update for this board
+until you deliberately configure or publish its package source.
