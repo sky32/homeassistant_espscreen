@@ -1,6 +1,6 @@
 // Generated firmware profile dispatch.
 #include "font.h"
-struct FirmwareUi { lv_obj_t *room, *time, *prev, *next, *number; void (*bind)(); void (*cells)(); const char *look; };
+struct FirmwareUi { lv_obj_t *room, *time, *prev, *next, *number; void (*bind)(); void (*cells)(); const char *look; bool han; };
 namespace standard_118 {
 #include "standard_118/ui.h"
 }
@@ -51,36 +51,36 @@ namespace standard_294 {
 }
 static FirmwareUi setup_firmware_ui(lv_obj_t *root, int dpi) {
 if (dpi == 118) { using namespace standard_118; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 133) { using namespace standard_133; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 143) { using namespace compact_143; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "compact"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "compact", false}; }
 if (dpi == 144) { using namespace standard_144; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 146) { using namespace compact_146; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "compact"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "compact", false}; }
 if (dpi == 149) { using namespace standard_149; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 165) { using namespace standard_165; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", true}; }
 if (dpi == 170) { using namespace standard_170; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 172) { using namespace standard_172; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 187) { using namespace standard_187; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 189) { using namespace standard_189; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 210) { using namespace standard_210; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 217) { using namespace standard_217; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", true}; }
 if (dpi == 254) { using namespace standard_254; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 255) { using namespace standard_255; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 if (dpi == 294) { using namespace standard_294; setup_firmware_ui(root);
-return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard"}; }
+return {lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "standard", false}; }
 return {};
 }

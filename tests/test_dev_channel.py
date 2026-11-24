@@ -16,8 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'screen_manager/app'))
 import yaml  # noqa: E402
 import core  # noqa: E402
+import ha_panel_source  # noqa: E402
 from core import REPO, channel_of, installation_yaml, set_channel  # noqa: E402
-from firmware import Firmware, LenientLoader  # noqa: E402
+from firmware import Firmware, LenientLoader, profile_meta  # noqa: E402
 
 # A screen's YAML as ESP Screens writes it, with a line of the owner's own and a comment next to the ref.
 SCREEN = f'''# Keep this file safe: it contains the unique keys for this screen.
@@ -108,7 +109,7 @@ class Channel(unittest.TestCase):
             if not isinstance(entry, dict) or 'external_components' not in entry:
                 continue
             with self.subTest(path.name):
-                self.assertEqual(entry['substitutions']['GITHUB_REF'], 'main')
+                self.assertEqual(entry['substitutions']['GITHUB_REF'], ha_panel_source.REF if path.stem == ha_panel_source.BOARD else 'main')
                 self.assertEqual({source['source']['ref'] for source in entry['external_components']}, {'${GITHUB_REF}'})
                 if 'FONT_DIR' in entry['substitutions']:
                     self.assertIn('/${GITHUB_REF}/fonts', entry['substitutions']['FONT_DIR'])
@@ -127,6 +128,28 @@ class Branch(unittest.TestCase):
         path = Path(self.tmp.name) / name
         path.write_bytes(text.encode())
         return path
+
+    def test_only_ha_panel_uses_the_fork_and_keeps_its_ref(self):
+        set_channel('dev')
+        board = ha_panel_source.BOARD
+        data = {'board': board, 'name': 'hall', 'friendly_name': 'Hall'}
+        text = installation_yaml(data)
+        config = load(text)
+        package = config['packages']['display']
+        self.assertEqual(package['url'], ha_panel_source.URL)
+        self.assertEqual(package['ref'], ha_panel_source.REF)
+        self.assertEqual(config['substitutions']['GITHUB_REF'], package['ref'])
+        self.assertTrue(profile_meta(text)['screen'])
+        self.assertEqual(profile_meta(text)['package'], f'packages/{board}.yaml')
+        entry = load((ROOT / package['files'][0]).read_text())
+        self.assertEqual(entry['external_components'][0]['source']['url'], package['url'] + '.git')
+        self.assertEqual(entry['substitutions']['FONT_DIR'],
+                         f'https://raw.githubusercontent.com/{ha_panel_source.REPOSITORY}/${{GITHUB_REF}}/fonts')
+        path = self.write(text)
+        self.assertFalse(self.firmware.set_branch(path.name, 'dev'))
+        self.assertEqual(path.read_text(), text)
+        for other in ('guition', 'waveshare43'):
+            self.assertEqual(load(installation_yaml(dict(data, board=other)))['packages']['display']['url'], REPO)
 
     def test_main_to_dev_and_back_changes_that_line_alone(self):
         path = self.write(SCREEN)

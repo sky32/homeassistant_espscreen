@@ -124,6 +124,8 @@ ALARM_CLASSES = frozenset(['battery', 'carbon_monoxide', 'gas', 'heat', 'lock', 
 # (packages/core.yaml's SCRIPT_GLYPHS_<SCRIPT>, a test keeps the two equal; docs/TRANSLATING.md, "Letters"): its
 # translation file's `_meta.script` names the list.
 SCRIPT_GLYPHS = {'cyrillic': frozenset('АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяЁё№')}
+# The Han subset's repertoire is also recorded in the Simplified Chinese translation's metadata.
+SCRIPT_GLYPHS['han'] = frozenset(i18n.TRANSLATIONS.meta('zh-Hans').get('glyphs', ''))
 
 def clean_text(text):
     """Text the screen can draw: known glyphs, the letters of its language's own script, accents folded to the base

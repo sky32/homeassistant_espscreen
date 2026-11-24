@@ -21,6 +21,7 @@ import build_logs
 import build_memory
 import build_server
 import chip_revision
+import ha_panel_source
 from core import BOARD_KEYS, REF, REPO, SHAPES, channel, hotspot_name, installation_yaml, old_hotspot_name, our_ref, ref
 from i18n import t
 
@@ -69,17 +70,22 @@ def profile_meta(text):
         return value if isinstance(value, str) else None
     # 'screen': the profile pulls this project's board package, so it is one of ours (not any ESPHome device).
     packages = data.get('packages') if isinstance(data.get('packages'), dict) else {}
-    ours = any(isinstance(entry, dict) and REPO in str(entry.get('url', '')) for entry in packages.values())
     # The board package the profile builds from ("packages/guition.yaml"): what the screen looks like follows
     # from it (core.SHAPES), so the editor draws the right screen before it has ever been flashed.
-    package = None
+    package, ours = None, False
     for entry in packages.values():
-        if isinstance(entry, dict) and REPO in str(entry.get('url', '')):
-            files = entry.get('files')
-            first = files[0] if isinstance(files, list) and files else files
-            if isinstance(first, str):
-                package = first
-                break
+        if not isinstance(entry, dict):
+            continue
+        url = str(entry.get('url', ''))
+        files = entry.get('files')
+        first = (files[0] if files else None) if isinstance(files, list) else files
+        if REPO not in url and not (url in (ha_panel_source.URL, ha_panel_source.URL + '.git')
+                                   and first == f'packages/{ha_panel_source.BOARD}.yaml'):
+            continue
+        ours = True
+        if isinstance(first, str):
+            package = first
+            break
     api = data.get('api') if isinstance(data.get('api'), dict) else {}
     encryption = api.get('encryption') if isinstance(api.get('encryption'), dict) else {}
     key = encryption.get('key')

@@ -84,9 +84,13 @@ class Translations:
         if not isinstance(code, str):
             return 'en'
         by_lower = {known.lower(): known for known in self.data}
-        for candidate in (code, code.split('-')[0]):
-            if candidate.lower() in by_lower:
-                return by_lower[candidate.lower()]
+        code = code.strip().replace('_', '-').lower()
+        # Home Assistant uses script codes; browsers can request regional codes instead.
+        chinese = 'zh-hans' if code in ('zh', 'zh-cn', 'zh-sg', 'zh-my') else (
+            'zh-hant' if code in ('zh-tw', 'zh-hk', 'zh-mo') else code)
+        for candidate in (code, chinese, code.split('-')[0]):
+            if candidate in by_lower:
+                return by_lower[candidate]
         return 'en'
 
     def meta(self, code):

@@ -56,7 +56,7 @@ def section(text, key):
     return re.search(r'^' + key + r':\n.*?(?=^[a-z_]+:|\Z)', text, re.M | re.S)[0]
 
 
-def generate(dpi, look, profile):
+def generate(dpi, look, profile, han=False):
     global OUT, WORK
     OUT = ROOT / f"web/wasm/generated/{look}_{dpi}"
     WORK = ROOT / f".esphome/wasm-codegen/{look}_{dpi}"
@@ -66,6 +66,8 @@ def generate(dpi, look, profile):
     # density; canvas dimensions and number of cells remain runtime inputs.
     raw = profiles.raw_substitutions(ROOT / profile)
     raw['DISPLAY_DPI'] = str(dpi)
+    if han:
+        raw.update(HAN_ON_16MB='1', FLASH_SIZE='16MB', LANGUAGE='zh-Hans')
     values = profiles.evaluate(raw)
     values.update(CAMERA_PAINT_FILL='', CALIBRATION_PAINT_FILL='')
     core = profiles.resolve(profiles.CORE.read_text(), values)
@@ -206,10 +208,12 @@ if __name__ == '__main__':
     if version('esphome') != expected:
         raise SystemExit(f'Use ESPHome {expected}, matching the add-on, to regenerate the preview.')
     targets = variants()
+    han_dpis = {round(float(values['DISPLAY_DPI'])) for board in profiles.BOARDS
+                if str((values := profiles.board_values(board))['HAN_CAPABLE']) == '1'}
     for dpi, look, profile in targets:
-        generate(dpi, look, profile)
+        generate(dpi, look, profile, dpi in han_dpis)
     lines = ['// Generated firmware profile dispatch.', '#include "font.h"',
-             'struct FirmwareUi { lv_obj_t *room, *time, *prev, *next, *number; void (*bind)(); void (*cells)(); const char *look; };']
+             'struct FirmwareUi { lv_obj_t *room, *time, *prev, *next, *number; void (*bind)(); void (*cells)(); const char *look; bool han; };']
     if len({dpi for dpi, _, _ in targets}) != len(targets):
         raise RuntimeError('Multiple looks at the same density: extend the host profile selector before building.')
     for dpi, look, _ in targets:
@@ -219,6 +223,6 @@ if __name__ == '__main__':
     for dpi, look, _ in targets:
         ns = f'{look}_{dpi}'
         lines += [f'if (dpi == {dpi}) {{ using namespace {ns}; setup_firmware_ui(root);',
-                  f'return {{lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "{look}"}}; }}']
+                  f'return {{lbl_room, lbl_time, page_prev, page_next, page_number, bind_firmware_ui, setup_firmware_cells, "{look}", {str(dpi in han_dpis).lower()}}}; }}']
     lines += ['return {};', '}']
     (OUT.parent / 'profiles.h').write_text('\n'.join(lines) + '\n')

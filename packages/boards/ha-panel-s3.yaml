@@ -1,0 +1,91 @@
+# ESP Screens - ha-panel-s3: a 3.5-inch 480 x 320 panel. Written by tools/new_board.py from the freenovefnk0104s
+# board: its packages and its hardware sections are the template's until they are replaced by this board's
+# (docs/ADDING_A_BOARD.md). docs/PROFILES.md says how the files of a screen fit together.
+packages:
+  build: !include ../hardware/esp-idf.yaml
+  look: !include ../looks/standard.yaml
+  touch: !include ../features/capacitive-touch.yaml
+  backlight: !include ../features/backlight.yaml
+  self_test: !include ../features/self-test.yaml
+
+substitutions:
+  # The key of this board file; the firmware reports it so ESP Screens knows what board a screen is.
+  BOARD_ID: "ha-panel-s3"
+  DEVICE_NAME: "ha-panel-s3"
+  DEVICE_FRIENDLY_NAME: "My HA Panel"
+  FLASH_SIZE: "16MB"
+  HAN_ON_16MB: "1"
+
+  # The glass: the panel's own pixels and its density, 577 diagonal pixels over 3.5 inches.
+  PANEL_W: "320"
+  PANEL_H: "480"
+  DISPLAY_DPI: "164.825"
+  # The LVGL angle that lays this panel out lying down (480 x 320). Standing up is a quarter further.
+  ROTATION_LANDSCAPE: "90"
+  # The tile grid: columns and rows of cells lying down, and standing up.
+  GRID_COLS: "2"
+  GRID_ROWS: "2"
+  GRID_COLS_PORTRAIT: "1"
+  GRID_ROWS_PORTRAIT: "3"
+  LVGL_BUFFER_SIZE: "12%"                       # LVGL's draw buffer as a share of the screen
+
+  # The board's PSRAM allows larger layouts than a board without it.
+  SCREEN_MAX_TILES: "128"
+  SCREEN_MAX_PAGES: "24"
+  SCREEN_MAX_BAR_ITEMS: "12"
+  BACKLIGHT_FREQUENCY: "44100Hz"
+
+# ESP32-S3 N16R8: native 320 x 480 ST7796 SPI panel, landscape after a quarter turn.
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: ${FLASH_SIZE}
+  cpu_frequency: 240MHz
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+spi:
+  id: lcd
+  clk_pin: GPIO13
+  mosi_pin: GPIO12
+
+i2c:
+  id: touch_bus
+  sda: GPIO6
+  scl: GPIO7
+  frequency: 400kHz
+  scan: true
+
+output:
+  - platform: ledc
+    pin: GPIO14
+    id: gpio_backlight_pwm
+    frequency: ${BACKLIGHT_FREQUENCY}
+
+touchscreen:
+  - platform: ft63x6
+    id: ts_touch
+    i2c_id: touch_bus
+    display: my_display
+    interrupt_pin: GPIO5
+    update_interval: 20ms
+
+display:
+  - platform: mipi_spi
+    id: my_display
+    model: ST7796
+    spi_id: lcd
+    dimensions:
+      width: 320
+      height: 480
+    color_order: bgr
+    invert_colors: true
+    dc_pin: GPIO9
+    cs_pin: GPIO8
+    reset_pin: GPIO10
+    spi_mode: 0
+    data_rate: 80MHz
+    update_interval: never
+    auto_clear_enabled: false

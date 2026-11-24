@@ -1,3 +1,9 @@
+## Unreleased
+
+- Completed the Simplified and Traditional Chinese installation wizard, including the firmware preparation and flashing prompts.
+- Added Simplified and Traditional Chinese for the editor and add-on, including browser locales such as `zh-CN` and `zh-TW`. A standalone editor can select a language with `?lang=zh-Hans` or `?lang=zh-Hant`. Eligible 16 MB HA Panel S3 and Waveshare 4.3 builds can also display Simplified Chinese; other physical screens use English when Chinese is selected.
+- Added an experimental HA Panel S3 profile with a 480 × 320 ST7796 display and FT6336 touch. Its installer uses the fork's board package, components and fonts without changing other boards' sources.
+
 ## 0.4.103 (firmware 0.64.0)
 
 - **A plugin's times are right whatever time zone the app's machine is in.** A time that a web service or an entity gives without a time zone (a departure at 17:25, the start of a collection) was read in the zone of the machine the app runs on, not in your Home Assistant's. Where those differ (the app in a container that stands in UTC, a home in another zone than its host), a plugin's tile showed such times off by the difference, and so did the plugins' examples in the library. They are read in Home Assistant's time zone now, as the plugins' documentation says; a plugin that names a zone of its own for a time keeps it.

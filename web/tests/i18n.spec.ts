@@ -103,6 +103,20 @@ describe("choosing a language", () => {
     expect(pickLanguage(null, available)).toBe("en");
     expect(pickLanguage("", available)).toBe("en");
   });
+  it("loads the Chinese script for regional browser locales", async () => {
+    expect(pickLanguage("zh-CN")).toBe("zh-Hans");
+    expect(pickLanguage("zh-SG")).toBe("zh-Hans");
+    expect(pickLanguage("zh_TW")).toBe("zh-Hant");
+    expect(pickLanguage("zh-HK")).toBe("zh-Hant");
+    expect(await setEditorLanguage(pickLanguage("zh-CN"))).toBe("zh-Hans");
+    expect(t("editor.common.close")).toBe("关闭");
+  });
+  it("allows a standalone page to override the browser locale", () => {
+    const standalone = { get parent() { return this; }, location: { search: "?lang=zh-TW" }, navigator: { language: "en-US" } };
+    expect(pickLanguage(requestedLanguage(standalone as unknown as Window))).toBe("zh-Hant");
+    standalone.location.search = "?lang=unavailable";
+    expect(requestedLanguage(standalone as unknown as Window)).toBe("en-US");
+  });
   it("reads Home Assistant's <html lang> inside its iframe, else the browser's language", () => {
     const frame = document.createElement("iframe");
     document.body.append(frame);

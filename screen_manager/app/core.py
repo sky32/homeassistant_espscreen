@@ -20,6 +20,7 @@ import text_tile
 import catalogue
 import tile_icons
 import chip_revision
+import ha_panel_source
 
 # The entity types a tile shows, as the tile catalogue has them (catalogue/*.yaml, catalogue.py): a type exists here only
 # where it has a file there, which comes after the firmware's UI for it (docs/CATALOGUE.md).
@@ -3221,7 +3222,8 @@ def installation_yaml(data):
     # so an update never turns swiping on for a screen that is out there.
     # The components and fonts come from the branch the board package does (packages/<key>.yaml), main unless the app
     # runs in another channel.
-    branch_line = f'  GITHUB_REF: {quote(ref())}\n' if ref() != REF else ''
+    source, revision_ref = (ha_panel_source.URL, ha_panel_source.REF) if board == ha_panel_source.BOARD else (REPO, ref())
+    branch_line = f'  GITHUB_REF: {quote(revision_ref)}\n' if revision_ref != REF else ''
     # An OTA password, not yet `ota: encryption:` with the api key: ESPHome before 2026.9 refuses that, and the owner's
     # ESPHome Device Builder may still be older (docs/RELEASING.md, "ESPHome versions").
     key, ota = base64.b64encode(secrets.token_bytes(32)).decode(), secrets.token_urlsafe(24)
@@ -3253,8 +3255,8 @@ esphome:
 
 packages:
   display:
-    url: {REPO}
-    ref: {ref()}
+    url: {source}
+    ref: {revision_ref}
     files: [packages/{board}.yaml]
     refresh: 0s
   local_overrides: !include {name}.local.yaml

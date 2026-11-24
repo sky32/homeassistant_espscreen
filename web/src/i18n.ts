@@ -66,17 +66,26 @@ export function requestedLanguage(win: Window = window) {
     if (win.parent !== win) {
       const lang = win.parent.document.documentElement.lang;
       if (lang) return lang;
+    } else {
+      const lang = new URLSearchParams(win.location.search).get("lang");
+      if (lang && matchLanguage(lang)) return lang;
     }
   } catch {
     // A parent on another origin keeps its document to itself.
   }
   return win.navigator.language || "en";
 }
-// The language of the list that fits a code best: the same one (pt-BR), else its base language (pt), else none.
+// Home Assistant uses script codes for Chinese, while browsers can use regional codes.
+// Keep these aliases in sync with Translations.resolve in the add-on.
+const CHINESE_ALIASES = new Map([
+  ["zh", "zh-Hans"], ["zh-cn", "zh-Hans"], ["zh-sg", "zh-Hans"], ["zh-my", "zh-Hans"],
+  ["zh-tw", "zh-Hant"], ["zh-hk", "zh-Hant"], ["zh-mo", "zh-Hant"],
+]);
+// Prefer the exact code, then a Chinese alias, then the base language (pt-BR -> pt).
 export function matchLanguage(wanted: string | null | undefined, available = languages()) {
   const find = (code: string) => available.find((own) => own.toLowerCase() === code.toLowerCase());
-  const code = (wanted || "").trim();
-  return code ? find(code) || find(code.split("-")[0]) : undefined;
+  const code = (wanted || "").trim().replaceAll("_", "-");
+  return code ? find(code) || find(CHINESE_ALIASES.get(code.toLowerCase()) || "") || find(code.split("-")[0]) : undefined;
 }
 export const pickLanguage = (wanted: string | null | undefined, available = languages()) => matchLanguage(wanted, available) || "en";
 

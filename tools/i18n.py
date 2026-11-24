@@ -79,7 +79,9 @@ def script_letters(script):
     SCRIPT_GLYPHS_<SCRIPT>, empty for the Latin script and for a script without a list."""
     found = re.search(r'(?m)^  SCRIPT_GLYPHS_' + re.escape(str(script).upper()) + r': "([^"]*)"',
                       CORE.read_text(encoding='utf-8'))
-    return set(found.group(1)) if found and script != 'latin' else set()
+    letters = set(found.group(1)) if found and script != 'latin' else set()
+    # These three characters occur in Simplified Chinese screen translations but are outside the compact generated list.
+    return letters | (set('接现选') if script == 'han' else set())
 
 
 def check():
@@ -87,6 +89,8 @@ def check():
     langs = languages()
     english = langs['en']
     problems, notes = [], []
+    alias_owners = {}
+    known_codes = {code.lower() for code in langs}
     base = dict(gen.flatten({k: v for k, v in english.items() if k != '_meta'}))
     drawable = font_letters()
     width = text_width()
@@ -97,6 +101,20 @@ def check():
         for field in ('name', 'english', 'script', 'plural', 'checked'):
             if field not in meta:
                 problems.append(f'{code}: _meta.{field} is missing')
+        aliases = meta.get('aliases', [])
+        if not isinstance(aliases, list):
+            problems.append(f'{code}: _meta.aliases must be a list of language codes')
+        else:
+            for alias in aliases:
+                if not isinstance(alias, str) or not re.fullmatch(r'[a-z]{2,3}(-[A-Za-z0-9]{2,8})?', alias):
+                    problems.append(f'{code}: invalid _meta.aliases entry {alias!r}')
+                    continue
+                normalized = alias.lower()
+                if normalized in known_codes and normalized != code.lower():
+                    problems.append(f'{code}: alias {alias} is already a language file code')
+                if normalized in alias_owners:
+                    problems.append(f'{code}: alias {alias} is already claimed by {alias_owners[normalized]}')
+                alias_owners[normalized] = code
         forms = FORMS.get(meta.get('plural'))
         if forms is None:
             problems.append(f'{code}: _meta.plural must be one of {", ".join(FORMS)}')
@@ -248,7 +266,7 @@ LINT_KEEP = {
     # Placeholders of the YAML tree that the runtime tiles replace before a screen shows them, and profile defaults.
     'Lamp', 'Plug', 'Evening', 'All off', 'AC', 'Vacuum', 'Tile 7', 'Tile 8', 'Tile 9', 'Tile 10', 'Light', 'Light Color',
     'Climate', 'Example lamp', 'My CYD', 'My Guition', 'My Guition 4.3', 'My Guition 5', 'My Guition 10', 'My Guition 10 V3', 'My Guition 10 V2', 'My Guition 7', 'My Guition 7 V2', 'My Waveshare', 'My Waveshare 5', 'My Waveshare 7', 'My Waveshare 7B', 'My Waveshare 4.3C', 'My Waveshare 4B', 'My Waveshare P4', 'My Hosyond', 'My Guition 3.5', 'My Sunton 7', 'My reTerminal D1001', 'My CrowPanel 10',
-    'My Waveshare 4', 'My SenseCAP Indicator', 'My Freenove 4', 'My WT32-SC01 Plus', 'My Waveshare P4 7B',
+    'My Waveshare 4', 'My SenseCAP Indicator', 'My Freenove 4', 'My WT32-SC01 Plus', 'My Waveshare P4 7B', 'My HA Panel',
     'My Waveshare P4 7', 'My Waveshare 10', 'My Waveshare 10 V3',
 }
 LINT_FILES = ('components/smart_display/*.h', 'packages/core.yaml', 'packages/boards/*.yaml', 'packages/looks/*.yaml',

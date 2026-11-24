@@ -302,6 +302,18 @@ class UpdaterTests(unittest.IsolatedAsyncioTestCase):
             self.assertIn(FIRMWARE_VERSION, m.updates.results['text.screen1']['message'])
             m.firmware.run = original
 
+    async def test_chinese_english_fallback_does_not_request_an_update(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            m = self.setup_manager(tmp)
+            m.ha.ha_language = 'zh-Hans'
+            screen = {'language_sensor': True, 'language': 'en', 'features': 'dimmable'}
+            self.assertFalse(m.updates.language_due(screen))
+            self.assertTrue(m.updates.speaks_region(screen))
+            screen['features'] = 'dimmable han'
+            self.assertTrue(m.updates.language_due(screen))
+            screen['language'] = 'zh-Hans'
+            self.assertTrue(m.updates.speaks_region(screen))
+
     async def test_language_update_is_verified_by_the_screen_language(self):
         """A screen on the current firmware that speaks another language than Settings -> Language & region gets an
         update, and the update counts once its "Screen language" sensor says the new language (app 0.2.90). The cached

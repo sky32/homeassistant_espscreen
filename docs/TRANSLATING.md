@@ -52,8 +52,10 @@ there is a `sv.json`, but already the Swedish 24-hour clock and `1 234,5`.
      for the rest, compare with the English. `screen.script.yesterday_time_short` is that line's short wording, which
      a tile falls back to when `yesterday_time` doesn't fit there: keep both the same where your word is short enough.
 3. Look at it for real, if you can. In Tessera open **Settings → Language & region** and choose your language. The
-   editor itself follows the language of your Home Assistant profile. The screens show the new texts after their
-   firmware update.
+   editor itself follows the language of your Home Assistant profile, or the browser language when opened directly.
+   Chinese regional codes such as `zh-CN` and `zh-TW` select Simplified and Traditional Chinese. On a standalone editor,
+   add `?lang=zh-Hans` or `?lang=zh-Hant` to the page URL to override the browser language without changing the screens.
+   The screens show the new texts after their firmware update.
 4. Change what needs changing. To find a word you saw, search for it in the file: the key it sits under says where it
    shows (`screen`, `addon`, `editor`), and the same key in `en.json` holds the English. A word under `screen.ha` is
    Home Assistant's own: change it in [Home Assistant's translations](https://developers.home-assistant.io/docs/translations/)
@@ -94,7 +96,8 @@ A partial check helps too. Say which sections you went through, and leave `check
 | Latin | English, Dutch, German, French, Italian, Spanish, Portuguese, Polish, Czech, the Nordic languages, Turkish, ... | Every screen: the fonts carry every letter European languages use |
 | Cyrillic | Russian | Yes: the Cyrillic letters go only onto a screen built in a Cyrillic language (see "Letters" below) |
 | Cyrillic, Greek | Ukrainian, Bulgarian, Greek | Possible in the same way: a maintainer adds the language to the list, or a list for a new script. Ask first. |
-| Chinese, Japanese, Korean | | Only on a Guition, with the characters the texts need; a CYD has too little room and shows English |
+| Han | Simplified Chinese | HA Panel S3 and Waveshare 4.3 with 16 MB flash. Other builds use English. |
+| Han | Traditional Chinese, Japanese, Korean | No physical screen font yet. |
 | Right-to-left, or letters that join | Arabic, Hebrew, Persian, Thai, Hindi | Not yet: the screens' graphics library doesn't write them without extra work |
 
 The editor and the app's messages work in any language, whatever the screens can draw.
@@ -117,6 +120,12 @@ A list holds the letters its languages write and no more, since every letter is 
 built in that language. To add a language of a script that has a list, add its code to `SCRIPT_GLYPHS` beside `ru` and
 the letters it writes that the list lacks to both lists (Ukrainian adds Є, є, І, і, Ї, ї, Ґ and ґ). A new script takes a
 list of its own in both places, letters the text font (Roboto) has.
+
+Simplified Chinese uses a Noto Sans CJK SC subset in the same five font roles. Only profiles that set `HAN_ON_16MB`
+and build with `FLASH_SIZE: 16MB` include it, and only when built in Simplified Chinese. Test the compiled image against
+its OTA app slot before enabling another profile. The source font file size is not the cost of the rendered glyphs.
+Keep `SCRIPT_GLYPHS_HAN`, `zh-Hans.json`'s `_meta.glyphs`, and the font subset in sync. Fonts come from the same published
+tree as the board package, or from `fonts/` for local builds.
 
 ## The format
 

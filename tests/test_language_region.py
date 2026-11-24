@@ -42,6 +42,13 @@ class NotationTests(unittest.TestCase):
             self.assertIn(written['numbers'], ('point', 'comma', 'space'), code)
             self.assertIn(written['group_min'], (1, 2), code)
 
+    def test_chinese_regional_codes_follow_their_script(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for code, expected in (('zh-CN', 'zh-Hans'), ('zh-sg', 'zh-Hans'),
+                                   ('zh_TW', 'zh-Hant'), ('ZH-HK', 'zh-Hant')):
+                with self.subTest(code=code):
+                    self.assertEqual(region(tmp, ha=code).language(), expected)
+
     def test_automatic_follows_home_assistants_own_language(self):
         with tempfile.TemporaryDirectory() as tmp:
             # Swedish: English texts (no file yet), Swedish clock and numbers.

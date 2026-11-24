@@ -193,6 +193,12 @@ const char *preview_next_setting() {
 // The language ESP Screens builds the screens in (app 0.4.86): its code ("nl", "pt-BR"), else its base language,
 // else English, as a build of that code would carry. 1 when the code or its base has a table of its own.
 int preview_language(const char *code) {
+  const std::string language = code ? code : "";
+  if (language == "zh" || (language.rfind("zh-", 0) == 0 && (language != "zh-Hans" || !firmware.han))) {
+    screen_text::choose("en");
+    if (runtime_tiles::enabled) theme::redraw();
+    return 0;
+  }
   const bool own = screen_text::choose(code);
   if (runtime_tiles::enabled) theme::redraw();
   return own ? 1 : 0;

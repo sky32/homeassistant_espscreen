@@ -12,7 +12,7 @@ import changelog
 import ha_notice
 from build_failures import PASSING, failure_kind
 from build_queue import Round
-from core import FIRMWARE_VERSION, SHAPES, board_of, channel, firmware_target, parse_firmware
+from core import FIRMWARE_VERSION, SHAPES, board_of, channel, features_of, firmware_target, parse_firmware
 from i18n import Text, english, screen_t, shown, t
 
 LOG = logging.getLogger('screen_manager')
@@ -154,6 +154,14 @@ class Updater:
             profile = matches[0] if len(matches) == 1 else None
         return profile, screen.get('ip') or self.hosts.get(screen['id'])
 
+    def region_language(self, screen):
+        language = self.manager.region.language()
+        if language == 'zh-Hans':
+            if screen.get('language') == language or 'han' in (features_of(screen) or ()):
+                return language
+            return 'en'
+        return 'en' if language.split('-')[0] == 'zh' else language
+
     def language_due(self, screen):
         """True when a screen speaks another language than Settings -> Language & region says (app 0.2.90): its
         "Screen language" sensor, or English for firmware from before that sensor. A sensor without a state yet (the
@@ -161,14 +169,14 @@ class Updater:
         region = getattr(self.manager, 'region', None)
         if not region or (screen.get('language_sensor') and not screen.get('language')):
             return False
-        return (screen.get('language') or 'en') != region.language()
+        return (screen.get('language') or 'en') != self.region_language(screen)
 
     def speaks_region(self, screen):
         """Whether the screen says it speaks the language of Settings -> Language & region: what an update waits for."""
         region = getattr(self.manager, 'region', None)
         if not region:
             return True
-        return (screen.get('language') if screen.get('language_sensor') else 'en') == region.language()
+        return (screen.get('language') if screen.get('language_sensor') else 'en') == self.region_language(screen)
 
     def target_for(self, screen, profiles=None):
         """The firmware this screen is offered (app 0.3.21): its board's (core.firmware_target), so a fix for one board is

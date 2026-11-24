@@ -56,6 +56,29 @@ class FirmwareLetters(unittest.TestCase):
         self.assertEqual(named, files)
 
 
+class HanLetters(unittest.TestCase):
+    def test_han_repertoire(self):
+        letters = core_list('han')
+        self.assertEqual(set(letters), header_bar.SCRIPT_GLYPHS['han'])
+        self.assertEqual(len(letters), len(set(letters)))
+
+    def test_only_opted_in_16mb_boards_build_han(self):
+        for board, flash, language, expected in (
+            ('ha-panel-s3', '16MB', 'zh-Hans', 'zh-Hans'),
+            ('waveshare43', '16MB', 'zh-CN', 'zh-Hans'),
+            ('waveshare43', '8MB', 'zh-Hans', 'en'),
+            ('cyd', '4MB', 'zh-Hans', 'en'),
+            ('ha-panel-s3', '16MB', 'zh-Hant', 'en'),
+            ('ha-panel-s3', '16MB', 'ru', 'ru'),
+        ):
+            with self.subTest(board=board, flash=flash, language=language):
+                raw = profiles.raw_substitutions(ROOT / f'checkout/{board}.yaml')
+                values = profiles.evaluate(dict(raw, FLASH_SIZE=flash, LANGUAGE=language))
+                self.assertEqual(values['SCREEN_LANGUAGE'], expected)
+                self.assertEqual(bool(values['HAN_GLYPHS']), expected == 'zh-Hans')
+                self.assertEqual('CJK' in values['HAN_FONT_FILE'], expected == 'zh-Hans')
+
+
 class AppLetters(unittest.TestCase):
     def tearDown(self):
         i18n.SCREEN.set(None)
