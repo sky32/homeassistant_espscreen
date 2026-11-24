@@ -1,5 +1,6 @@
 ## Unreleased
 
+- Aligned Simplified Chinese glyphs with the Latin baseline on the screen and in the firmware preview.
 - Filled in the remaining Chinese editor and add-on messages for settings, updates, builds, plugins, events and sounds.
 - Completed the Simplified and Traditional Chinese installation wizard, including the firmware preparation and flashing prompts.
 - Added Simplified and Traditional Chinese for the editor and add-on, including browser locales such as `zh-CN` and `zh-TW`. A standalone editor can select a language with `?lang=zh-Hans` or `?lang=zh-Hant`. Eligible 16 MB HA Panel S3 and Waveshare 4.3 builds can also display Simplified Chinese; other physical screens use English when Chinese is selected.

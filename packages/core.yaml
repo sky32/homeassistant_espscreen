@@ -38,7 +38,7 @@ substitutions:
   SCRIPT_GLYPHS_HAN: "→、。一七三上下不与专东两个中为义之乐九也二云五亮人仅今从他令以件会传位低住体余作供保信修值倾假停像儿允充先光克免入全八六关其内再冰冲决冷准几出击分切列刚创别到制前剩力功加动劲包北匹区十升午单南卡即历压及发取叫可史号同名后向吗否含听启吸周呼命和响唤器四回固图在地场址均垂域增声备复外多夜大天太失头夹始婴媒字存安完定实客家容密寻导封射将小少尘尚居屏展已布帘带常幕干平年并床序库应度座庭建开异式弱强当录往待循微忙态感成或房所扇打执扩扫扬扰找报拆拒拖择持按换据接排提现插摄摆摸撤播操支放效散数整文斜断新方旁旋无日时明星映昨是显景晴智暂曲更最月有朗期未本机束条来板极果某柔查标校格检模次歌止正此段母每气水池没法活测浏消深添清温湿源滑潮激灯点热照燥片版状率环理生用电留的益目直看眠睡知码确碌示离秒称移程稍空窗第等系约线组经结络绝统继续缓缺网置者联背能自舒色艺节获落行表装西见视览解触计认记许设访识试话该语误请读调败起超路踪转轻载辑输过运返还这进连追送适选通道速遵部都配醒里重量钟钥钮铃锁错镜门闭问闲间防阳阴阵附除集雨雪雷雹雾霜静非靠面音页顶项顺预频颜风首高麦（），：？"
   HAN_GLYPHS: '${ SCRIPT_GLYPHS_HAN if SCREEN_LANGUAGE == "zh-Hans" else "" }'
   # An empty extra reuses the existing hearts file, so a non-Han build never fetches the Han subset.
-  HAN_FONT_FILE: '${ "NotoSansCJKsc-zh-Hans-subset.otf" if HAN_GLYPHS else "NotoSansSymbols2-hearts.ttf" }'
+  HAN_FONT_FILE: '${ "TesseraHan-zh-Hans.otf" if HAN_GLYPHS else "NotoSansSymbols2-hearts.ttf" }'
   # Swipe between pages on a screen that has stored no choice of its own: off, as every screen set up before had it, so
   # an update changes nothing there. New screen writes "1" into a new screen's own YAML, which then swipes and opens the
   # Dock out of the box. Once the screen stores a choice (any change of a setting), that choice wins. Keep "0" here.

@@ -146,6 +146,11 @@ as Roboto has none. The add-on's `header_bar.GLYPHS` is the same set (`tests/tes
 drops the invisible characters an emoji carries, which LVGL would otherwise draw as a box. A character outside the set
 shows as a box on the screen, so a new one goes into all five lists and `GLYPHS` together.
 
+For Simplified Chinese builds, `TesseraHan-zh-Hans.otf` is a subset of Noto Sans CJK SC with its ascender matched to
+Roboto by `tools/align_han_font.py`. ESPHome measures each extra glyph from its source font's ascender, but mixed
+text shares the Roboto baseline. Matching the ascenders removes a six-pixel offset at 27 px without moving or
+resizing the glyph outlines.
+
 ## What the firmware does with it
 
 - `ui::configure(dpi, look)` at boot (`components/smart_display/ui_scale.h`): one scale for every

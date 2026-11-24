@@ -76,7 +76,22 @@ class HanLetters(unittest.TestCase):
                 values = profiles.evaluate(dict(raw, FLASH_SIZE=flash, LANGUAGE=language))
                 self.assertEqual(values['SCREEN_LANGUAGE'], expected)
                 self.assertEqual(bool(values['HAN_GLYPHS']), expected == 'zh-Hans')
-                self.assertEqual('CJK' in values['HAN_FONT_FILE'], expected == 'zh-Hans')
+                self.assertEqual(values['HAN_FONT_FILE'], 'TesseraHan-zh-Hans.otf' if expected == 'zh-Hans'
+                                 else 'NotoSansSymbols2-hearts.ttf')
+
+    def test_han_and_roboto_share_the_rasterized_baseline(self):
+        from PIL import ImageFont
+        from fontTools.ttLib import TTFont
+
+        han = ROOT / 'fonts/TesseraHan-zh-Hans.otf'
+        with TTFont(han) as font:
+            self.assertLessEqual(set(map(ord, core_list('han'))), font.getBestCmap().keys())
+        for size in range(8, 65):
+            for weight in (400, 500, 700):
+                with self.subTest(size=size, weight=weight):
+                    latin = ROOT / f'fonts/Roboto-{weight}.ttf'
+                    self.assertEqual(ImageFont.truetype(han, size).getmetrics()[0],
+                                     ImageFont.truetype(latin, size).getmetrics()[0])
 
 
 class AppLetters(unittest.TestCase):
