@@ -712,7 +712,7 @@
       "not_paired": "此 ESP 螢幕尚未配對，請重新整理概覽。",
       "choose_icon": "請從清單中選擇圖示。",
       "skill_not_written": "無法將技能寫入 {folder}（{reason}）。",
-      "skill_no_home_assistant": "The skill cannot be installed from here: {folder} is not Home Assistant's configuration folder. Download it for claude.ai instead.",
+      "skill_no_home_assistant": "無法在此安裝此技能：{folder} 不是 Home Assistant 的設定目錄。請下載後用於 claude.ai。",
       "settings": {
         "unknown": "未知螢幕設定，請重新整理管理頁面。",
         "invalid_value": "{setting} 的值無效。",
@@ -868,9 +868,9 @@
         "host": "請輸入目標螢幕的 IP 位址或主機名稱。",
         "grid": "請選擇此螢幕支援的網格。",
         "build_gone": "找不到此建置任務。最新建置可在“韌體與 USB”中查看。",
-        "log_gone": "This build log is no longer kept.",
-        "friendly_name_quote": "A screen's name cannot hold \" or \\. Write 4 inch as 4in, for example.",
-        "chip_revision": "The chip revision must be a whole number, such as 302 for v3.2."
+        "log_gone": "此建置記錄已不再保留。",
+        "friendly_name_quote": "螢幕名稱不能包含雙引號或反斜線。例如，可將 4 吋寫成 4in。",
+        "chip_revision": "晶片修訂號必須是整數，例如 v3.2 填 302。"
       },
       "updates": {
         "automatic": "請選擇開啟或關閉自動更新。",
@@ -885,7 +885,7 @@
         "reinstall_dev": "只有開發通道允許重新安裝相同版本的韌體。",
         "all_on_the_way": "所有需要更新的螢幕都已在更新隊列中。",
         "nothing_to_reinstall": "目前沒有可重新安裝韌體的螢幕：它們可能已離線、正在更新，或在此應用程式中找不到對應設定檔。",
-        "hour": "Choose an hour from 0 to 23."
+        "hour": "請選擇 0 到 23 之間的小時數。"
       },
       "remove": {
         "not_allowed": "此應用程式無權從 Home Assistant 移除整合。請前往 Home Assistant“設定 → 裝置與服務”移除螢幕。",
@@ -994,7 +994,7 @@
         "rate_failed": "無法提交評分，請稍後重試。",
         "count_failed": "無法關閉使用量統計：目前無法連線 Tessera，請稍後重試。",
         "forget_running": "仍有螢幕正在執行此外掛，請先從螢幕中卸載。",
-        "no_before": "There is no earlier version of this plugin to go back to."
+        "no_before": "此外掛沒有可還原的舊版本。"
       },
       "extras": {
         "request": "此螢幕不支援修改該擴展選項。"
@@ -1023,7 +1023,7 @@
       "video": {
         "not_written": "無法將 Tessera 影片組件寫入 {folder}：{reason}。",
         "not_installed": "請先安裝 Tessera 影片整合。",
-        "no_home_assistant": "Tessera video cannot be installed from here: {folder} is not Home Assistant's configuration folder. Download the integration and unpack it there."
+        "no_home_assistant": "無法在此安裝 Tessera 視訊整合：{folder} 不是 Home Assistant 的設定目錄。請下載整合並解壓縮到正確的設定目錄。"
       },
       "report": {
         "depth": "請選擇基礎報告或完整報告。",
@@ -1051,16 +1051,16 @@
         "too_many": "每塊螢幕最多可新增 {most} 個自訂圖示。"
       },
       "sounds": {
-        "name": "Give the sound a name.",
-        "many": "There are {most} sounds of your own already. Remove one first.",
-        "format": "A sound is a WAV file of 16 kHz, mono, 16 bits.",
-        "short": "A sound is at least a quarter of a second long.",
-        "long": "A sound is at most {seconds} seconds long.",
-        "unknown": "That sound does not exist.",
-        "volume": "A volume is a whole number of dB from -40 to 0.",
-        "none": "This screen plays no sound for this. Choose one first.",
-        "older": "This screen needs a firmware update for this.",
-        "busy": "This screen is in a call right now."
+        "name": "請為音效命名。",
+        "many": "已有 {most} 個自訂音效，請先移除一個。",
+        "format": "音效檔案須為 16 kHz、單聲道、16 位元的 WAV。",
+        "short": "音效至少要有 0.25 秒。",
+        "long": "音效最長為 {seconds} 秒。",
+        "unknown": "找不到這個音效。",
+        "volume": "音量必須是 -40 到 0 dB 之間的整數。",
+        "none": "此螢幕未為此事件設定音效。請先選擇一個。",
+        "older": "此螢幕需要更新韌體才能使用此功能。",
+        "busy": "此螢幕正在通話中。"
       }
     },
     "status": {
@@ -1093,14 +1093,14 @@
       "no_report": "螢幕未上報韌體版本 {version}，請檢查裝置。",
       "dropped_off": "更新後螢幕失去連線，請檢查裝置。",
       "updated": "已更新至韌體 {version}。",
-      "round_stopped": "Not updated: a screen before it in the round failed its check, so the round stopped."
+      "round_stopped": "未更新：本輪有排在前面的螢幕未通過檢查，更新已停止。"
     },
     "notify": {
       "update_stopped": "自動更新在 {name} 處停止：{reason}。其餘螢幕未作更改。",
-      "plugin_failed": "{names} did not build on {screen}: {reason} The screen still runs what it ran before. Open Tessera, then the screen's Plugins tab, for why and the log.",
-      "updates": "Updates are ready for your screens. Open Tessera to install them.",
-      "updates_firmware": "firmware {version}",
-      "plugin_waits": "{names} is built for {screen}, but {screen} was not reachable. It installs by itself as soon as the screen is back."
+      "plugin_failed": "{names} 未能為「{screen}」建置：{reason} 螢幕繼續執行原版本。請在 Tessera 開啟該螢幕的「外掛」分頁，查看原因和記錄。",
+      "updates": "你的螢幕有可用更新。請開啟 Tessera 安裝。",
+      "updates_firmware": "韌體 {version}",
+      "plugin_waits": "{names} 已為「{screen}」建置完成，但暫時無法連線。等「{screen}」恢復連線後會自動安裝。"
     },
     "labels": {
       "built_into_screen": "螢幕內建",
@@ -1684,7 +1684,7 @@
       "nothing_to_restructure": "此頁面還沒有可重新排列的裝置卡片。請先新增幾張卡片再試。"
     },
     "sounds": {
-      "test": "Ringtone test"
+      "test": "鈴聲測試"
     }
   },
   "editor": {
@@ -1825,8 +1825,8 @@
       "home": "螢幕概覽",
       "dev_chip": "目前執行的是 Tessera 開發版；它建置的螢幕韌體均來自開發分支。",
       "plugins": {
-        "failed": "A plugin did not build",
-        "updates": "{n} plugin updates"
+        "failed": "有一個外掛建置失敗",
+        "updates": "{n} 個外掛更新"
       }
     },
     "palette": {
@@ -2062,19 +2062,19 @@
       "no_room": "空間不足",
       "plugins": "外掛卡片",
       "tiles": {
-        "view": "How the library shows entities",
-        "tiles": "Tiles",
-        "list": "List",
-        "tiles_title": "Show every entity as the tiles it can be, at their sizes",
-        "list_title": "Show the entities as a list",
-        "placed": "On this screen",
-        "add_size": "Add {name} as a tile of {columns} × {rows}"
+        "view": "資源庫的實體顯示方式",
+        "tiles": "卡片",
+        "list": "清單",
+        "tiles_title": "依可用尺寸顯示各實體的卡片",
+        "list_title": "以清單顯示實體",
+        "placed": "已新增至此螢幕",
+        "add_size": "將「{name}」新增為 {columns} × {rows} 的卡片"
       },
       "extras": {
-        "title": "{n} extras",
-        "config": "Settings",
-        "diagnostic": "Diagnosis",
-        "hidden": "Hidden in Home Assistant"
+        "title": "{n} 個額外實體",
+        "config": "設定",
+        "diagnostic": "診斷",
+        "hidden": "在 Home Assistant 中隱藏"
       }
     },
     "memory": {
@@ -2989,32 +2989,32 @@
       },
       "parts": {
         "display": {
-          "title": "Display",
-          "grid": "{columns} × {rows} tiles"
+          "title": "顯示",
+          "grid": "{columns} × {rows} 卡片格線"
         },
         "standby": {
-          "title": "Standby & night",
-          "after": "Standby after {time}",
-          "off": "No standby",
-          "night": "Night {start} to {end}"
+          "title": "待機與夜間",
+          "after": "{time} 後進入待機",
+          "off": "不待機",
+          "night": "夜間時段：{start} 至 {end}"
         },
         "navigation": {
-          "title": "Navigation",
-          "home_after": "Back to Home after {time}"
+          "title": "導覽",
+          "home_after": "{time} 後返回首頁"
         },
         "board": {
-          "title": "This board"
+          "title": "此開發板"
         },
         "help": {
-          "title": "Help",
-          "feedback": "Feedback"
+          "title": "說明",
+          "feedback": "意見回饋"
         }
       },
       "blocks": {
-        "display": "Brightness and rotation",
-        "standby": "Standby",
-        "night": "Night",
-        "navigation": "Navigation"
+        "display": "亮度與旋轉",
+        "standby": "待機",
+        "night": "夜間",
+        "navigation": "導覽"
       }
     },
     "update": {
@@ -3025,13 +3025,13 @@
         "install": "正在編譯並安裝……",
         "verify": "等待螢幕重新上線……",
         "settle": "正在檢查執行穩定性……",
-        "ready": "Built ahead: installs once the screens before it passed their check"
+        "ready": "已提前建置，排在前面的螢幕通過檢查後安裝"
       },
       "new_language": "新語言：{name}",
-      "restarting": "Restarting with the new firmware, back in a minute or two",
-      "restarting_short": "Updating",
-      "editor_new": "A new version of the editor is ready. It loads by itself once you are done here.",
-      "editor_reload": "Reload now"
+      "restarting": "正在用新韌體重新啟動，預計一兩分鐘後恢復",
+      "restarting_short": "正在更新",
+      "editor_new": "新版編輯器已就緒。你完成目前操作後會自動載入。",
+      "editor_reload": "立即重新載入"
     },
     "settings": {
       "updates": {
@@ -3051,8 +3051,8 @@
         "reinstall_all_hint": "依次為所有螢幕編譯最新開發版韌體，再透過 Wi-Fi 安裝。開發版的版本號保持不變，因此不會以普通更新的形式提示新開發版。",
         "reinstall_all_confirm": "要為 {n} 塊螢幕重新安裝最新開發版韌體嗎？將逐台建置和安裝，各螢幕完成後會重啟。",
         "reinstall_all_go": "重新安裝",
-        "auto_hint_hour": "Between {from} and {to}, one screen at a time. Stops on an error and reports it in Home Assistant.",
-        "hour_label": "Start at",
+        "auto_hint_hour": "在 {from} 至 {to} 之間逐台更新螢幕。遇到錯誤時會停止，並在 Home Assistant 中回報。",
+        "hour_label": "開始時間",
         "plugin_row": "{screen}: {names}"
       },
       "video": {
@@ -3071,8 +3071,8 @@
         "screens": "啟用影片的螢幕：{names}",
         "no_screens": "目前沒有任何啟用了影片功能的螢幕。請在配有攝影機的 P4 螢幕上安裝“螢幕攝影機”外掛並啟用其“影片”功能。",
         "writes": "將寫入資料夾 {path}，再次安裝會替換其中內容。Tessera 會自動新增啟用影片功能的螢幕。",
-        "no_home_assistant": "This app runs apart from Home Assistant, so it cannot put the integration in place itself. Download it, unpack the zip in Home Assistant's configuration folder (where configuration.yaml is) and restart Home Assistant.",
-        "download": "Download the integration"
+        "no_home_assistant": "此應用程式與 Home Assistant 分開執行，無法自動安裝整合。請下載 ZIP，將它解壓縮到 Home Assistant 的設定目錄（configuration.yaml 所在的目錄），再重新啟動 Home Assistant。",
+        "download": "下載整合"
       },
       "claude": {
         "installed": "技能已安裝，Claude Code 可以立即使用。",
@@ -3204,36 +3204,36 @@
       },
       "parts": {
         "updates": {
-          "title": "Updates",
-          "nightly": "Updated every night",
-          "badge": "{n} updates"
+          "title": "更新",
+          "nightly": "每晚自動更新",
+          "badge": "{n} 項更新"
         },
         "builds": {
-          "title": "Builds",
-          "server": "On build server {name}",
-          "server_pending": "Build server {name} waits to be accepted",
-          "no_server": "Built in this app"
+          "title": "建置",
+          "server": "在建置伺服器「{name}」上執行",
+          "server_pending": "建置伺服器「{name}」等待確認",
+          "no_server": "在此應用程式中建置"
         },
         "language": {
-          "auto": "{name}, from Home Assistant",
-          "auto_plain": "From Home Assistant"
+          "auto": "{name}（跟隨 Home Assistant）",
+          "auto_plain": "跟隨 Home Assistant"
         },
         "plugins": {
-          "title": "Plugins",
-          "counting_on": "Counted in the store",
-          "counting_off": "Not counted in the store",
-          "asking_on": "Asks for stars",
-          "asking_off": "Never asks for stars"
+          "title": "外掛",
+          "counting_on": "計入商店統計",
+          "counting_off": "不計入商店統計",
+          "asking_on": "提示加星",
+          "asking_off": "不提示加星"
         },
         "home_assistant": {
           "title": "Home Assistant",
-          "video": "Video {state}",
-          "claude": "Claude {state}",
-          "running": "running",
-          "not_installed": "not installed",
-          "installed": "installed",
-          "update": "update ready",
-          "restart": "restart needed"
+          "video": "視訊：{state}",
+          "claude": "Claude：{state}",
+          "running": "執行中",
+          "not_installed": "未安裝",
+          "installed": "已安裝",
+          "update": "更新已就緒",
+          "restart": "需要重新啟動"
         }
       }
     },
@@ -3256,17 +3256,17 @@
       "download_file": "下載 {name}",
       "download_how": "請在 Chrome 或 Edge 中使用 {esphome_web} 將韌體刷入螢幕：點選“連線”，選擇螢幕的 USB 序列埠，點選“安裝”並選擇此檔案。檔案中包含 Wi-Fi 密碼和螢幕密鑰，請妥善保管，不要分享。",
       "waiting": "正在排隊，前面還有 {n} 個建置任務",
-      "kept_title": "Build logs",
-      "kept_note": "Every build's log stays here, also after the app restarts. The newest 40 are kept.",
-      "kept_none": "No build has run yet.",
-      "kept_download": "Download",
+      "kept_title": "建置記錄",
+      "kept_note": "應用程式重新啟動後仍會保留建置記錄，最多保留最新 40 份。",
+      "kept_none": "尚未執行過建置。",
+      "kept_download": "下載",
       "kept_state": {
-        "success": "Succeeded",
-        "failed": "Failed",
-        "interrupted": "Stopped, the app restarted",
-        "running": "Building",
-        "other": "Ended",
-        "retry": "Again, at the end of the line"
+        "success": "成功",
+        "failed": "失敗",
+        "interrupted": "應用程式重新啟動，建置已中斷",
+        "running": "建置中",
+        "other": "已結束",
+        "retry": "重試，排到佇列末尾"
       }
     },
     "installer": {
@@ -3883,7 +3883,7 @@
       "part_page": "頁面：標題與導航",
       "part_page_hint": "頁面標題、首頁設定及進入此頁面的方式",
       "home_control_hint": "在此頁面頂端列左側顯示首頁按鈕，點選可返回首頁。",
-      "place_on_new_page": "On a new page"
+      "place_on_new_page": "放到新頁面"
     },
     "feedback": {
       "question": "你的螢幕執行是否符合預期？",
@@ -3968,7 +3968,7 @@
         "connect": "開發板沒有響應。選擇連接埠時請按住板上的 BOOT 按鈕，直到安裝開始後再放開。重新插拔 USB 線也可能解決問題。",
         "wrong_chip": "USB 上的開發板晶片是 {found}，但此螢幕韌體適用於 {expected}。請連線正確的螢幕，或選擇對應板卡。",
         "wrong_image": "Tessera 建置的韌體適用於 {expected}，但 USB 上連線的是 {found} 晶片。未寫入任何內容。",
-        "wrong_revision": "The firmware Tessera built is for chip revisions {from} to {to}, but the chip on the cable is {found}. Nothing was written. Start again, so Tessera builds for this chip.",
+        "wrong_revision": "Tessera 建置的韌體適用於晶片修訂版本 {from} 至 {to}，但目前連接的晶片是 {found}。未寫入任何資料，請重新開始，以便為此晶片建置韌體。",
         "disconnected": "螢幕已中斷連線，請重新插入 USB 線後重試。",
         "download": "無法從 Tessera 獲取韌體：{error}",
         "failed": "安裝失敗：{error}"
@@ -4169,7 +4169,7 @@
         "not_running": "未在螢幕上執行",
         "runs_other": "螢幕正在執行版本 {version}",
         "queued": "正在排隊",
-        "update_failed": "Update {version} failed"
+        "update_failed": "更新至 {version} 失敗"
       },
       "source": {
         "link": "從連結新增",
@@ -4399,7 +4399,7 @@
         "too_short": "至少輸入 {n} 個字元。"
       },
       "tabs": {
-        "all": "All",
+        "all": "全部",
         "tiles": "卡片",
         "screensavers": "螢幕保護程式",
         "functions": "功能",
@@ -4438,7 +4438,7 @@
         "used": "使用最多"
       },
       "none_in_tab": {
-        "all": "No plugins yet.",
+        "all": "尚無外掛。",
         "tiles": "暫無提供卡片的外掛。",
         "screensavers": "目前沒有螢幕保護程式外掛。",
         "functions": "暫無提供全螢幕功能的外掛。",
@@ -4559,40 +4559,40 @@
       },
       "suggest": {
         "why": {
-          "camera": "This board has a camera."
+          "camera": "這塊開發板有攝影機。"
         },
-        "question": "Add {name} to {screen}?",
-        "yes": "Add it",
-        "yes_update": "Add with the next update",
-        "no": "No, thanks",
-        "building": "{name} is being built for {screen}.",
-        "with_update": "{name} comes with {screen}'s next update.",
-        "declined": "Fine. {name} stays on the Plugins page if you want it later."
+        "question": "要將「{name}」新增至「{screen}」嗎？",
+        "yes": "新增",
+        "yes_update": "在下次更新時新增",
+        "no": "不用了",
+        "building": "正在為「{screen}」建置「{name}」。",
+        "with_update": "「{name}」將隨「{screen}」的下次更新安裝。",
+        "declined": "如果之後需要，可以在「外掛」頁面找到「{name}」。"
       },
-      "download_log": "Download the log",
+      "download_log": "下載記錄",
       "failures": {
-        "update": "{name} {version} did not build on {screen}",
-        "added": "{name} did not build on {screen}",
-        "update_note": "The screen still runs version {current}. The log says why.",
-        "added_note": "It is not on the screen. The log says why.",
-        "no_log": "No log was kept of this build.",
-        "details": "Details",
-        "report": "Report to {maker}",
-        "report_hint": "Reporting opens an issue at the maker's GitHub, already filled in. Attach the log you downloaded.",
+        "update": "未能為「{screen}」建置「{name}」{version}",
+        "added": "未能為「{screen}」建置「{name}」",
+        "update_note": "螢幕仍在執行 {current} 版本。原因請見記錄。",
+        "added_note": "此外掛未安裝到螢幕。原因請見記錄。",
+        "no_log": "未保留這次建置的記錄。",
+        "details": "詳細資料",
+        "report": "向 {maker} 回報",
+        "report_hint": "回報會開啟作者 GitHub 上已預填內容的問題表單。請附上下載的記錄。",
         "why": {
-          "plugin": "It stopped in the plugin's own code, which its maker can fix.",
-          "memory": "This Home Assistant ran short of memory while building. A build server on another computer builds it without that limit.",
-          "offline": "It was built, but {screen} did not take it, also after it came back. Check that it is on and on Wi-Fi.",
-          "offline_wait": "It was built, but {screen} was not reachable. It installs by itself once the screen is back.",
-          "network": "A download it needs did not come, also on a second try. Try again in a moment.",
-          "build": "The log says why.",
-          "interrupted": "The app restarted during the build, and again during the try after it."
+          "plugin": "建置在外掛程式碼中停止，可由外掛作者修正。",
+          "memory": "建置時此 Home Assistant 主機記憶體不足。可改用另一台電腦上的建置伺服器。",
+          "offline": "已建置，但「{screen}」恢復連線後仍未接收。請檢查螢幕是否開機並已連上 Wi-Fi。",
+          "offline_wait": "已建置，但暫時無法連線至「{screen}」。螢幕恢復連線後會自動安裝。",
+          "network": "所需檔案下載失敗，重試後仍未成功。請稍後再試。",
+          "build": "原因請見記錄。",
+          "interrupted": "應用程式在建置期間重新啟動，重試過程中再次重新啟動。"
         },
-        "build_server": "Set up a build server"
+        "build_server": "設定建置伺服器"
       },
       "back": {
-        "button": "Back to {version}",
-        "not_running": "{screen} came back without {name} after the update. Going back to the version before usually helps."
+        "button": "還原至 {version}",
+        "not_running": "「{screen}」更新後已恢復連線，但未執行「{name}」。通常可以還原至先前版本解決。"
       }
     },
     "plugin_tile": {
@@ -4665,17 +4665,17 @@
       },
       "icons": "正在編譯包含自定義圖示的韌體",
       "steps": {
-        "title": "Steps of the build",
-        "wait": "Waits its turn",
-        "build": "Builds",
-        "send": "Sends it to the screen",
-        "confirm": "Screen confirms",
-        "on": "on {name}",
-        "send_waits": "Waits for its turn to install"
+        "title": "建置步驟",
+        "wait": "排隊等候",
+        "build": "建置",
+        "send": "傳送至螢幕",
+        "confirm": "螢幕確認",
+        "on": "在「{name}」上",
+        "send_waits": "等待輪到此螢幕安裝"
       },
-      "done": "{screen} is ready.",
-      "done_confirmed": "{screen} is ready, and says it runs what was built.",
-      "show_why": "Show why"
+      "done": "「{screen}」已就緒。",
+      "done_confirmed": "「{screen}」已就緒，並確認正在執行剛建置的版本。",
+      "show_why": "查看原因"
     },
     "grid": {
       "title": "網格",
@@ -4863,13 +4863,13 @@
         "on": "開",
         "off": "關"
       },
-      "calls": "Calls",
+      "calls": "通話",
       "parts": {
-        "automations": "{n} automations",
-        "no_automation": "No automation yet",
-        "alarm_panels": "{n} alarm panels",
-        "no_alarm": "No alarm panel in Home Assistant",
-        "rings_with": "Rings with {sound}"
+        "automations": "{n} 個自動化",
+        "no_automation": "尚無自動化",
+        "alarm_panels": "{n} 個警報面板",
+        "no_alarm": "Home Assistant 中沒有警報面板",
+        "rings_with": "鈴聲：{sound}"
       }
     },
     "doorbell": {
@@ -5219,95 +5219,95 @@
       "how_tile": "也可以將報警器新增到頁面。點選其卡片即可隨時開啟詳情，選擇布防模式或進行撤防。"
     },
     "calls": {
-      "hero_title": "Calls",
-      "hero_text": "When one screen calls another, the screen that is called rings. Choose what it rings with below: a ring holds its own pause and plays over and over until someone answers. A new choice reaches a screen with its next ring, no update needed."
+      "hero_title": "通話",
+      "hero_text": "一台螢幕呼叫另一台螢幕時，被呼叫的螢幕會響鈴。請在下方選擇鈴聲：鈴聲會依設定的間隔循環播放，直到有人接聽。新設定在下次響鈴時生效，不必更新韌體。"
     },
     "sounds": {
       "kinds": {
         "call": {
-          "title": "Ringtone",
-          "text": "What a screen rings with when another screen calls it."
+          "title": "通話鈴聲",
+          "text": "其他螢幕呼叫此螢幕時播放的鈴聲。"
         },
         "doorbell": {
-          "title": "Chime",
-          "text": "What a screen plays when the doorbell rings, on the screens that open the doorbell, and on the others with its alert."
+          "title": "門鈴聲",
+          "text": "門鈴響起時播放的音效：開啟門鈴畫面的螢幕會播放，其他螢幕顯示門鈴提醒時也會播放。"
         },
         "alert": {
-          "title": "Alert sound",
-          "text": "What a screen plays when an alert of yours comes up, sent with the esp_screens_show_alert event. No sound is what it was before. An alert can stay quiet with sound: false."
+          "title": "提醒音效",
+          "text": "透過 esp_screens_show_alert 事件傳送的提醒出現時，螢幕會播放此音效。先前預設無音效；若要讓某則提醒靜音，可設定 sound: false。"
         }
       },
       "builtin": {
-        "classic": "Classic",
-        "marimba": "Marimba",
-        "digital": "Digital",
-        "bell": "Bell",
-        "chime": "Ding-dong",
-        "notice": "Notice"
+        "classic": "經典",
+        "marimba": "馬林巴琴",
+        "digital": "電子音",
+        "bell": "鐘聲",
+        "chime": "叮咚",
+        "notice": "通知音"
       },
-      "none": "No sound",
-      "play": "Play",
-      "stop": "Stop",
+      "none": "無音效",
+      "play": "播放",
+      "stop": "停止",
       "seconds": "{seconds} s",
-      "chosen": "Sound chosen",
-      "saved": "Sound saved",
-      "removed": "Sound removed",
-      "own_add": "Add your own sound",
-      "own_choose": "Choose a sound file",
-      "own_unreadable": "This file could not be read as sound.",
-      "own_full": "There are {most} sounds of your own already. Remove one first.",
-      "own_drag_loop": "Drag the part, or one of its edges, here or in the whole file above; the arrow keys move them too. Play (or the space bar) loops it the way the screen will.",
-      "own_drag_once": "Drag the part, or one of its edges, here or in the whole file above; the arrow keys move them too. Play (or the space bar) plays it the way the screen will.",
-      "own_name": "Name",
-      "own_save": "Save sound",
-      "screens_title": "Per screen",
-      "screens_same": "Same as every screen",
-      "screens_none": "No screen that can play this has a speaker yet.",
-      "volume": "Volume",
+      "chosen": "已選擇音效",
+      "saved": "已儲存音效",
+      "removed": "已移除音效",
+      "own_add": "新增自訂音效",
+      "own_choose": "選擇音效檔案",
+      "own_unreadable": "無法將此檔案讀取為音訊。",
+      "own_full": "已有 {most} 個自訂音效，請先移除一個。",
+      "own_drag_loop": "可在此處或上方的完整波形中拖曳選取片段及其邊緣，也可以用方向鍵調整。點選播放或按空白鍵，可依螢幕實際效果循環試聽。",
+      "own_drag_once": "可在此處或上方的完整波形中拖曳選取片段及其邊緣，也可以用方向鍵調整。點選播放或按空白鍵，可依螢幕實際效果試聽。",
+      "own_name": "名稱",
+      "own_save": "儲存音效",
+      "screens_title": "依螢幕設定",
+      "screens_same": "與其他螢幕相同",
+      "screens_none": "目前沒有可播放此音效且配有喇叭的螢幕。",
+      "volume": "音量",
       "volume_db": "{volume} dB",
-      "volume_saved": "Volume set to {volume} dB",
-      "test": "Test",
-      "test_hint": "Plays it on this screen now, the way it will for real",
-      "test_sent": "Playing it on the screen",
+      "volume_saved": "音量已設為 {volume} dB",
+      "test": "測試",
+      "test_hint": "立即在此螢幕上播放，效果與實際使用相同",
+      "test_sent": "正在螢幕上播放",
       "editor": {
-        "drop": "Drop a sound file here",
-        "drop_loop": "Any song or sound will do: you pick the part that rings, at most {seconds} seconds, with the pause you want before it rings again.",
-        "drop_once": "Any song or sound will do: you pick the part that plays, at most {seconds} seconds.",
-        "total": "{time} in all",
-        "other_file": "Another file",
-        "whole": "The whole file",
-        "part": "The part that plays",
-        "start": "Start",
-        "end": "End",
-        "of_most": "of at most {most} s",
-        "made": "What is done to the sound",
-        "no_bass": "Bass filtered out",
-        "soft_ends": "Soft ends",
-        "even_level": "Even volume",
-        "repeats": "Repeats"
+        "drop": "將音效檔案拖曳到這裡",
+        "drop_loop": "可以使用任意歌曲或音效。選擇不超過 {seconds} 秒的鈴聲片段，再設定每次重播前的停頓。",
+        "drop_once": "可以使用任意歌曲或音效。選擇不超過 {seconds} 秒的播放片段。",
+        "total": "總長度 {time}",
+        "other_file": "選擇其他檔案",
+        "whole": "完整檔案",
+        "part": "播放片段",
+        "start": "開始",
+        "end": "結束",
+        "of_most": "最長 {most} 秒",
+        "made": "音效處理",
+        "no_bass": "濾除低音",
+        "soft_ends": "淡入淡出",
+        "even_level": "平衡音量",
+        "repeats": "循環播放"
       }
     },
     "updates_card": {
-      "title": "{n} updates for {screen}",
-      "one": "One build of {screen}.",
-      "one_build": "All of it in one build of {screen}.",
-      "firmware": "Firmware",
-      "away": "{screen} is offline. It can be updated once it is back.",
-      "go_all": "Update everything"
+      "title": "「{screen}」有 {n} 項更新",
+      "one": "為「{screen}」建置一次。",
+      "one_build": "「{screen}」的所有更新只需建置一次。",
+      "firmware": "韌體",
+      "away": "「{screen}」已離線。恢復連線後即可更新。",
+      "go_all": "全部更新"
     },
     "build_room": {
-      "title": "This Home Assistant may be short of memory for a build",
-      "text": "It has {free} GB free, and a build needs about {need} GB. A build may fail or slow Home Assistant down. A build server on another computer avoids that, and so does updating the screen from ESPHome Device Builder on a computer.",
-      "server": "Build server"
+      "title": "此 Home Assistant 主機的記憶體可能不足以完成建置",
+      "text": "目前可用記憶體為 {free} GB，建置約需 {need} GB。建置可能失敗或拖慢 Home Assistant。可使用另一台電腦上的建置伺服器，或從電腦上的 ESPHome 裝置建置工具更新螢幕。",
+      "server": "建置伺服器"
     },
     "history": {
-      "title": "Last {n} builds of this screen",
+      "title": "此螢幕最近 {n} 次建置",
       "by": {
-        "update": "Update",
-        "plugins": "Plugins",
-        "install": "Install",
-        "icons": "Icons",
-        "other": "Build"
+        "update": "更新",
+        "plugins": "外掛",
+        "install": "安裝",
+        "icons": "圖示",
+        "other": "建置"
       }
     }
   }

@@ -713,7 +713,7 @@
       "not_paired": "此 ESP 屏幕尚未配对，请刷新概览。",
       "choose_icon": "请从列表中选择图标。",
       "skill_not_written": "无法将技能写入 {folder}（{reason}）。",
-      "skill_no_home_assistant": "The skill cannot be installed from here: {folder} is not Home Assistant's configuration folder. Download it for claude.ai instead.",
+      "skill_no_home_assistant": "无法在此安装该技能：{folder} 不是 Home Assistant 的配置目录。请下载后用于 claude.ai。",
       "settings": {
         "unknown": "未知屏幕设置，请刷新管理页面。",
         "invalid_value": "{setting} 的值无效。",
@@ -869,9 +869,9 @@
         "host": "请输入目标屏幕的 IP 地址或主机名。",
         "grid": "请选择此屏幕支持的网格。",
         "build_gone": "找不到此构建任务。最新构建可在“固件与 USB”中查看。",
-        "log_gone": "This build log is no longer kept.",
-        "friendly_name_quote": "A screen's name cannot hold \" or \\. Write 4 inch as 4in, for example.",
-        "chip_revision": "The chip revision must be a whole number, such as 302 for v3.2."
+        "log_gone": "此构建日志已不再保留。",
+        "friendly_name_quote": "屏幕名称不能包含双引号或反斜杠。例如，可将 4 英寸写成 4in。",
+        "chip_revision": "芯片修订号必须是整数，例如 v3.2 填 302。"
       },
       "updates": {
         "automatic": "请选择开启或关闭自动更新。",
@@ -886,7 +886,7 @@
         "reinstall_dev": "只有开发通道允许重新安装相同版本的固件。",
         "all_on_the_way": "所有需要更新的屏幕都已在更新队列中。",
         "nothing_to_reinstall": "目前没有可重新安装固件的屏幕：它们可能已离线、正在更新，或在此应用中找不到对应配置文件。",
-        "hour": "Choose an hour from 0 to 23."
+        "hour": "请选择 0 到 23 之间的小时数。"
       },
       "remove": {
         "not_allowed": "此应用无权从 Home Assistant 移除集成。请前往 Home Assistant“设置 → 设备与服务”移除屏幕。",
@@ -995,7 +995,7 @@
         "rate_failed": "无法提交评分，请稍后重试。",
         "count_failed": "无法关闭使用量统计：当前无法连接 Tessera，请稍后重试。",
         "forget_running": "仍有屏幕正在运行此插件，请先从屏幕中卸载。",
-        "no_before": "There is no earlier version of this plugin to go back to."
+        "no_before": "此插件没有可恢复的早期版本。"
       },
       "extras": {
         "request": "此屏幕不支持修改该扩展选项。"
@@ -1024,7 +1024,7 @@
       "video": {
         "not_written": "无法将 Tessera 视频组件写入 {folder}：{reason}。",
         "not_installed": "请先安装 Tessera 视频集成。",
-        "no_home_assistant": "Tessera video cannot be installed from here: {folder} is not Home Assistant's configuration folder. Download the integration and unpack it there."
+        "no_home_assistant": "无法在此安装 Tessera 视频集成：{folder} 不是 Home Assistant 的配置目录。请下载该集成并解压到正确的配置目录。"
       },
       "report": {
         "depth": "请选择基础报告或完整报告。",
@@ -1052,16 +1052,16 @@
         "too_many": "每块屏幕最多可添加 {most} 个自定义图标。"
       },
       "sounds": {
-        "name": "Give the sound a name.",
-        "many": "There are {most} sounds of your own already. Remove one first.",
-        "format": "A sound is a WAV file of 16 kHz, mono, 16 bits.",
-        "short": "A sound is at least a quarter of a second long.",
-        "long": "A sound is at most {seconds} seconds long.",
-        "unknown": "That sound does not exist.",
-        "volume": "A volume is a whole number of dB from -40 to 0.",
-        "none": "This screen plays no sound for this. Choose one first.",
-        "older": "This screen needs a firmware update for this.",
-        "busy": "This screen is in a call right now."
+        "name": "请为声音命名。",
+        "many": "已有 {most} 个自定义声音，请先删除一个。",
+        "format": "声音文件须为 16 kHz、单声道、16 位的 WAV。",
+        "short": "声音至少要有 0.25 秒。",
+        "long": "声音最长为 {seconds} 秒。",
+        "unknown": "找不到这个声音。",
+        "volume": "音量必须是 -40 到 0 dB 之间的整数。",
+        "none": "此屏幕没有为此事件设置声音。请先选择一个。",
+        "older": "此屏幕需要更新固件才能使用此功能。",
+        "busy": "此屏幕正在通话中。"
       }
     },
     "status": {
@@ -1094,14 +1094,14 @@
       "no_report": "屏幕未上报固件版本 {version}，请检查设备。",
       "dropped_off": "更新后屏幕失去连接，请检查设备。",
       "updated": "已更新至固件 {version}。",
-      "round_stopped": "Not updated: a screen before it in the round failed its check, so the round stopped."
+      "round_stopped": "未更新：本轮有排在前面的屏幕未通过检查，更新已停止。"
     },
     "notify": {
       "update_stopped": "自动更新在 {name} 处停止：{reason}。其余屏幕未作更改。",
-      "plugin_failed": "{names} did not build on {screen}: {reason} The screen still runs what it ran before. Open Tessera, then the screen's Plugins tab, for why and the log.",
-      "updates": "Updates are ready for your screens. Open Tessera to install them.",
-      "updates_firmware": "firmware {version}",
-      "plugin_waits": "{names} is built for {screen}, but {screen} was not reachable. It installs by itself as soon as the screen is back."
+      "plugin_failed": "{names} 未能为「{screen}」构建：{reason} 屏幕继续运行原版本。请在 Tessera 中打开该屏幕的「插件」选项卡，查看原因和日志。",
+      "updates": "你的屏幕有可用更新。请打开 Tessera 安装。",
+      "updates_firmware": "固件 {version}",
+      "plugin_waits": "{names} 已为「{screen}」构建完成，但暂时无法连接。等「{screen}」恢复在线后会自动安装。"
     },
     "labels": {
       "built_into_screen": "屏幕内置",
@@ -1685,7 +1685,7 @@
       "nothing_to_restructure": "此页面还没有可重新排列的设备卡片。请先添加几张卡片再试。"
     },
     "sounds": {
-      "test": "Ringtone test"
+      "test": "铃声测试"
     }
   },
   "editor": {
@@ -1826,8 +1826,8 @@
       "home": "屏幕概览",
       "dev_chip": "当前运行的是 Tessera 开发版；它构建的屏幕固件均来自开发分支。",
       "plugins": {
-        "failed": "A plugin did not build",
-        "updates": "{n} plugin updates"
+        "failed": "有一个插件构建失败",
+        "updates": "{n} 个插件更新"
       }
     },
     "palette": {
@@ -2063,19 +2063,19 @@
       "no_room": "空间不足",
       "plugins": "插件卡片",
       "tiles": {
-        "view": "How the library shows entities",
-        "tiles": "Tiles",
-        "list": "List",
-        "tiles_title": "Show every entity as the tiles it can be, at their sizes",
-        "list_title": "Show the entities as a list",
-        "placed": "On this screen",
-        "add_size": "Add {name} as a tile of {columns} × {rows}"
+        "view": "资源库的实体显示方式",
+        "tiles": "卡片",
+        "list": "列表",
+        "tiles_title": "按可用尺寸显示每个实体的卡片",
+        "list_title": "以列表显示实体",
+        "placed": "已添加到此屏幕",
+        "add_size": "将「{name}」添加为 {columns} × {rows} 的卡片"
       },
       "extras": {
-        "title": "{n} extras",
-        "config": "Settings",
-        "diagnostic": "Diagnosis",
-        "hidden": "Hidden in Home Assistant"
+        "title": "{n} 个额外实体",
+        "config": "设置",
+        "diagnostic": "诊断",
+        "hidden": "在 Home Assistant 中隐藏"
       }
     },
     "memory": {
@@ -2990,32 +2990,32 @@
       },
       "parts": {
         "display": {
-          "title": "Display",
-          "grid": "{columns} × {rows} tiles"
+          "title": "显示",
+          "grid": "{columns} × {rows} 卡片网格"
         },
         "standby": {
-          "title": "Standby & night",
-          "after": "Standby after {time}",
-          "off": "No standby",
-          "night": "Night {start} to {end}"
+          "title": "待机与夜间",
+          "after": "{time} 后进入待机",
+          "off": "不待机",
+          "night": "夜间时段：{start} 至 {end}"
         },
         "navigation": {
-          "title": "Navigation",
-          "home_after": "Back to Home after {time}"
+          "title": "导航",
+          "home_after": "{time} 后返回主页"
         },
         "board": {
-          "title": "This board"
+          "title": "此开发板"
         },
         "help": {
-          "title": "Help",
-          "feedback": "Feedback"
+          "title": "帮助",
+          "feedback": "反馈"
         }
       },
       "blocks": {
-        "display": "Brightness and rotation",
-        "standby": "Standby",
-        "night": "Night",
-        "navigation": "Navigation"
+        "display": "亮度与旋转",
+        "standby": "待机",
+        "night": "夜间",
+        "navigation": "导航"
       }
     },
     "update": {
@@ -3026,13 +3026,13 @@
         "install": "正在编译并安装……",
         "verify": "等待屏幕重新上线……",
         "settle": "正在检查运行稳定性……",
-        "ready": "Built ahead: installs once the screens before it passed their check"
+        "ready": "已提前构建，排在前面的屏幕通过检查后安装"
       },
       "new_language": "新语言：{name}",
-      "restarting": "Restarting with the new firmware, back in a minute or two",
-      "restarting_short": "Updating",
-      "editor_new": "A new version of the editor is ready. It loads by itself once you are done here.",
-      "editor_reload": "Reload now"
+      "restarting": "正在用新固件重启，预计一两分钟后恢复",
+      "restarting_short": "正在更新",
+      "editor_new": "新版编辑器已就绪。你完成当前操作后会自动加载。",
+      "editor_reload": "立即重新加载"
     },
     "settings": {
       "updates": {
@@ -3052,8 +3052,8 @@
         "reinstall_all_hint": "依次为所有屏幕编译最新开发版固件，再通过 Wi-Fi 安装。开发版的版本号保持不变，因此不会以普通更新的形式提示新开发版。",
         "reinstall_all_confirm": "要为 {n} 块屏幕重新安装最新开发版固件吗？将逐台构建和安装，各屏幕完成后会重启。",
         "reinstall_all_go": "重新安装",
-        "auto_hint_hour": "Between {from} and {to}, one screen at a time. Stops on an error and reports it in Home Assistant.",
-        "hour_label": "Start at",
+        "auto_hint_hour": "在 {from} 至 {to} 之间逐台更新屏幕。遇到错误时会停止，并在 Home Assistant 中报告。",
+        "hour_label": "开始时间",
         "plugin_row": "{screen}: {names}"
       },
       "video": {
@@ -3072,8 +3072,8 @@
         "screens": "启用视频的屏幕：{names}",
         "no_screens": "目前没有任何启用了视频功能的屏幕。请在配有摄像头的 P4 屏幕上安装“屏幕摄像头”插件并启用其“视频”功能。",
         "writes": "将写入文件夹 {path}，再次安装会替换其中内容。Tessera 会自动添加启用视频功能的屏幕。",
-        "no_home_assistant": "This app runs apart from Home Assistant, so it cannot put the integration in place itself. Download it, unpack the zip in Home Assistant's configuration folder (where configuration.yaml is) and restart Home Assistant.",
-        "download": "Download the integration"
+        "no_home_assistant": "此应用与 Home Assistant 分开运行，无法自动安装集成。请下载 ZIP，将其解压到 Home Assistant 的配置目录（configuration.yaml 所在的目录），然后重启 Home Assistant。",
+        "download": "下载集成"
       },
       "claude": {
         "installed": "技能已安装，Claude Code 可以立即使用。",
@@ -3205,36 +3205,36 @@
       },
       "parts": {
         "updates": {
-          "title": "Updates",
-          "nightly": "Updated every night",
-          "badge": "{n} updates"
+          "title": "更新",
+          "nightly": "每晚自动更新",
+          "badge": "{n} 项更新"
         },
         "builds": {
-          "title": "Builds",
-          "server": "On build server {name}",
-          "server_pending": "Build server {name} waits to be accepted",
-          "no_server": "Built in this app"
+          "title": "构建",
+          "server": "在构建服务器「{name}」上运行",
+          "server_pending": "构建服务器「{name}」等待确认",
+          "no_server": "在此应用内构建"
         },
         "language": {
-          "auto": "{name}, from Home Assistant",
-          "auto_plain": "From Home Assistant"
+          "auto": "{name}（跟随 Home Assistant）",
+          "auto_plain": "跟随 Home Assistant"
         },
         "plugins": {
-          "title": "Plugins",
-          "counting_on": "Counted in the store",
-          "counting_off": "Not counted in the store",
-          "asking_on": "Asks for stars",
-          "asking_off": "Never asks for stars"
+          "title": "插件",
+          "counting_on": "计入商店统计",
+          "counting_off": "不计入商店统计",
+          "asking_on": "提示加星",
+          "asking_off": "不提示加星"
         },
         "home_assistant": {
           "title": "Home Assistant",
-          "video": "Video {state}",
-          "claude": "Claude {state}",
-          "running": "running",
-          "not_installed": "not installed",
-          "installed": "installed",
-          "update": "update ready",
-          "restart": "restart needed"
+          "video": "视频：{state}",
+          "claude": "Claude：{state}",
+          "running": "运行中",
+          "not_installed": "未安装",
+          "installed": "已安装",
+          "update": "更新已就绪",
+          "restart": "需要重启"
         }
       }
     },
@@ -3257,17 +3257,17 @@
       "download_file": "下载 {name}",
       "download_how": "请在 Chrome 或 Edge 中使用 {esphome_web} 将固件刷入屏幕：点击“连接”，选择屏幕的 USB 串口，点击“安装”并选择此文件。文件中包含 Wi-Fi 密码和屏幕密钥，请妥善保管，不要分享。",
       "waiting": "正在排队，前面还有 {n} 个构建任务",
-      "kept_title": "Build logs",
-      "kept_note": "Every build's log stays here, also after the app restarts. The newest 40 are kept.",
-      "kept_none": "No build has run yet.",
-      "kept_download": "Download",
+      "kept_title": "构建日志",
+      "kept_note": "构建日志在应用重启后也会保留，最多保留最近 40 份。",
+      "kept_none": "尚未运行过构建。",
+      "kept_download": "下载",
       "kept_state": {
-        "success": "Succeeded",
-        "failed": "Failed",
-        "interrupted": "Stopped, the app restarted",
-        "running": "Building",
-        "other": "Ended",
-        "retry": "Again, at the end of the line"
+        "success": "成功",
+        "failed": "失败",
+        "interrupted": "应用重启，构建已中断",
+        "running": "构建中",
+        "other": "已结束",
+        "retry": "重试，排到队列末尾"
       }
     },
     "installer": {
@@ -3884,7 +3884,7 @@
       "part_page": "页面：标题与导航",
       "part_page_hint": "页面标题、首页设置及进入此页面的方式",
       "home_control_hint": "在此页面顶部栏左侧显示首页按钮，点击可返回首页。",
-      "place_on_new_page": "On a new page"
+      "place_on_new_page": "放到新页面"
     },
     "feedback": {
       "question": "你的屏幕运行是否符合预期？",
@@ -3969,7 +3969,7 @@
         "connect": "开发板没有响应。选择端口时请按住板上的 BOOT 按钮，直到安装开始后再松开。重新插拔 USB 线也可能解决问题。",
         "wrong_chip": "USB 上的开发板芯片是 {found}，但此屏幕固件适用于 {expected}。请连接正确的屏幕，或选择对应板卡。",
         "wrong_image": "Tessera 构建的固件适用于 {expected}，但 USB 上连接的是 {found} 芯片。未写入任何内容。",
-        "wrong_revision": "The firmware Tessera built is for chip revisions {from} to {to}, but the chip on the cable is {found}. Nothing was written. Start again, so Tessera builds for this chip.",
+        "wrong_revision": "Tessera 构建的固件适用于芯片修订版本 {from} 至 {to}，但连接的芯片是 {found}。未写入任何数据，请重新开始，以便为此芯片构建固件。",
         "disconnected": "屏幕已断开连接，请重新插入 USB 线后重试。",
         "download": "无法从 Tessera 获取固件：{error}",
         "failed": "安装失败：{error}"
@@ -4170,7 +4170,7 @@
         "not_running": "未在屏幕上运行",
         "runs_other": "屏幕正在运行版本 {version}",
         "queued": "正在排队",
-        "update_failed": "Update {version} failed"
+        "update_failed": "更新至 {version} 失败"
       },
       "source": {
         "link": "从链接添加",
@@ -4400,7 +4400,7 @@
         "too_short": "至少输入 {n} 个字符。"
       },
       "tabs": {
-        "all": "All",
+        "all": "全部",
         "tiles": "卡片",
         "screensavers": "屏幕保护程序",
         "functions": "功能",
@@ -4439,7 +4439,7 @@
         "used": "使用最多"
       },
       "none_in_tab": {
-        "all": "No plugins yet.",
+        "all": "暂无插件。",
         "tiles": "暂无提供卡片的插件。",
         "screensavers": "目前没有屏保插件。",
         "functions": "暂无提供全屏功能的插件。",
@@ -4560,40 +4560,40 @@
       },
       "suggest": {
         "why": {
-          "camera": "This board has a camera."
+          "camera": "这块开发板有摄像头。"
         },
-        "question": "Add {name} to {screen}?",
-        "yes": "Add it",
-        "yes_update": "Add with the next update",
-        "no": "No, thanks",
-        "building": "{name} is being built for {screen}.",
-        "with_update": "{name} comes with {screen}'s next update.",
-        "declined": "Fine. {name} stays on the Plugins page if you want it later."
+        "question": "要将「{name}」添加到「{screen}」吗？",
+        "yes": "添加",
+        "yes_update": "在下次更新时添加",
+        "no": "不用了",
+        "building": "正在为「{screen}」构建「{name}」。",
+        "with_update": "「{name}」将随「{screen}」的下次更新安装。",
+        "declined": "如果之后需要，可以在「插件」页面找到「{name}」。"
       },
-      "download_log": "Download the log",
+      "download_log": "下载日志",
       "failures": {
-        "update": "{name} {version} did not build on {screen}",
-        "added": "{name} did not build on {screen}",
-        "update_note": "The screen still runs version {current}. The log says why.",
-        "added_note": "It is not on the screen. The log says why.",
-        "no_log": "No log was kept of this build.",
-        "details": "Details",
-        "report": "Report to {maker}",
-        "report_hint": "Reporting opens an issue at the maker's GitHub, already filled in. Attach the log you downloaded.",
+        "update": "未能为「{screen}」构建「{name}」{version}",
+        "added": "未能为「{screen}」构建「{name}」",
+        "update_note": "屏幕仍在运行 {current} 版本。原因见日志。",
+        "added_note": "此插件未安装到屏幕。原因见日志。",
+        "no_log": "未保留此次构建的日志。",
+        "details": "详情",
+        "report": "向 {maker} 报告",
+        "report_hint": "报告会打开作者 GitHub 上预填内容的问题表单。请附上下载的日志。",
         "why": {
-          "plugin": "It stopped in the plugin's own code, which its maker can fix.",
-          "memory": "This Home Assistant ran short of memory while building. A build server on another computer builds it without that limit.",
-          "offline": "It was built, but {screen} did not take it, also after it came back. Check that it is on and on Wi-Fi.",
-          "offline_wait": "It was built, but {screen} was not reachable. It installs by itself once the screen is back.",
-          "network": "A download it needs did not come, also on a second try. Try again in a moment.",
-          "build": "The log says why.",
-          "interrupted": "The app restarted during the build, and again during the try after it."
+          "plugin": "构建在插件代码中停止，可由插件作者修复。",
+          "memory": "构建时此 Home Assistant 主机内存不足。可改用另一台电脑上的构建服务器。",
+          "offline": "已构建，但「{screen}」恢复在线后仍未接收。请检查屏幕是否开机并已连接 Wi-Fi。",
+          "offline_wait": "已构建，但暂时无法连接「{screen}」。屏幕恢复在线后会自动安装。",
+          "network": "所需文件下载失败，重试后仍未成功。请稍后再试。",
+          "build": "原因见日志。",
+          "interrupted": "应用在构建期间重启，重试过程中又再次重启。"
         },
-        "build_server": "Set up a build server"
+        "build_server": "设置构建服务器"
       },
       "back": {
-        "button": "Back to {version}",
-        "not_running": "{screen} came back without {name} after the update. Going back to the version before usually helps."
+        "button": "恢复到 {version}",
+        "not_running": "「{screen}」更新后已恢复在线，但没有运行「{name}」。通常可以恢复到先前版本解决。"
       }
     },
     "plugin_tile": {
@@ -4666,17 +4666,17 @@
       },
       "icons": "正在编译包含自定义图标的固件",
       "steps": {
-        "title": "Steps of the build",
-        "wait": "Waits its turn",
-        "build": "Builds",
-        "send": "Sends it to the screen",
-        "confirm": "Screen confirms",
-        "on": "on {name}",
-        "send_waits": "Waits for its turn to install"
+        "title": "构建步骤",
+        "wait": "等待排队",
+        "build": "构建",
+        "send": "发送到屏幕",
+        "confirm": "屏幕确认",
+        "on": "在「{name}」上",
+        "send_waits": "等待轮到此屏幕安装"
       },
-      "done": "{screen} is ready.",
-      "done_confirmed": "{screen} is ready, and says it runs what was built.",
-      "show_why": "Show why"
+      "done": "「{screen}」已就绪。",
+      "done_confirmed": "「{screen}」已就绪，并确认正在运行刚构建的版本。",
+      "show_why": "查看原因"
     },
     "grid": {
       "title": "网格",
@@ -4864,13 +4864,13 @@
         "on": "开",
         "off": "关"
       },
-      "calls": "Calls",
+      "calls": "通话",
       "parts": {
-        "automations": "{n} automations",
-        "no_automation": "No automation yet",
-        "alarm_panels": "{n} alarm panels",
-        "no_alarm": "No alarm panel in Home Assistant",
-        "rings_with": "Rings with {sound}"
+        "automations": "{n} 个自动化",
+        "no_automation": "尚无自动化",
+        "alarm_panels": "{n} 个警报面板",
+        "no_alarm": "Home Assistant 中没有警报面板",
+        "rings_with": "铃声：{sound}"
       }
     },
     "doorbell": {
@@ -5220,95 +5220,95 @@
       "how_tile": "也可以将报警器添加到页面。点击其卡片即可随时打开详情，选择布防模式或进行撤防。"
     },
     "calls": {
-      "hero_title": "Calls",
-      "hero_text": "When one screen calls another, the screen that is called rings. Choose what it rings with below: a ring holds its own pause and plays over and over until someone answers. A new choice reaches a screen with its next ring, no update needed."
+      "hero_title": "通话",
+      "hero_text": "一块屏幕呼叫另一块屏幕时，被呼叫的屏幕会响铃。请在下方选择铃声：铃声会按设定的间隔循环播放，直到有人接听。新设置在下次响铃时生效，无需更新固件。"
     },
     "sounds": {
       "kinds": {
         "call": {
-          "title": "Ringtone",
-          "text": "What a screen rings with when another screen calls it."
+          "title": "通话铃声",
+          "text": "其他屏幕呼叫此屏幕时播放的铃声。"
         },
         "doorbell": {
-          "title": "Chime",
-          "text": "What a screen plays when the doorbell rings, on the screens that open the doorbell, and on the others with its alert."
+          "title": "门铃声",
+          "text": "门铃响起时播放的声音：打开门铃画面的屏幕会播放，其他屏幕在显示门铃提醒时也会播放。"
         },
         "alert": {
-          "title": "Alert sound",
-          "text": "What a screen plays when an alert of yours comes up, sent with the esp_screens_show_alert event. No sound is what it was before. An alert can stay quiet with sound: false."
+          "title": "提醒音",
+          "text": "通过 esp_screens_show_alert 事件发送的提醒出现时，屏幕会播放这个声音。此前默认无声音；若要让某条提醒静音，可设置 sound: false。"
         }
       },
       "builtin": {
-        "classic": "Classic",
-        "marimba": "Marimba",
-        "digital": "Digital",
-        "bell": "Bell",
-        "chime": "Ding-dong",
-        "notice": "Notice"
+        "classic": "经典",
+        "marimba": "马林巴琴",
+        "digital": "电子音",
+        "bell": "钟声",
+        "chime": "叮咚",
+        "notice": "通知音"
       },
-      "none": "No sound",
-      "play": "Play",
-      "stop": "Stop",
+      "none": "无声音",
+      "play": "播放",
+      "stop": "停止",
       "seconds": "{seconds} s",
-      "chosen": "Sound chosen",
-      "saved": "Sound saved",
-      "removed": "Sound removed",
-      "own_add": "Add your own sound",
-      "own_choose": "Choose a sound file",
-      "own_unreadable": "This file could not be read as sound.",
-      "own_full": "There are {most} sounds of your own already. Remove one first.",
-      "own_drag_loop": "Drag the part, or one of its edges, here or in the whole file above; the arrow keys move them too. Play (or the space bar) loops it the way the screen will.",
-      "own_drag_once": "Drag the part, or one of its edges, here or in the whole file above; the arrow keys move them too. Play (or the space bar) plays it the way the screen will.",
-      "own_name": "Name",
-      "own_save": "Save sound",
-      "screens_title": "Per screen",
-      "screens_same": "Same as every screen",
-      "screens_none": "No screen that can play this has a speaker yet.",
-      "volume": "Volume",
+      "chosen": "已选择声音",
+      "saved": "已保存声音",
+      "removed": "已删除声音",
+      "own_add": "添加自定义声音",
+      "own_choose": "选择声音文件",
+      "own_unreadable": "无法将此文件读取为音频。",
+      "own_full": "已有 {most} 个自定义声音，请先删除一个。",
+      "own_drag_loop": "可在此处或上方的完整波形中拖动选段及其边缘，也可以用方向键调整。点击播放或按空格键，可按屏幕实际效果循环试听。",
+      "own_drag_once": "可在此处或上方的完整波形中拖动选段及其边缘，也可以用方向键调整。点击播放或按空格键，可按屏幕实际效果试听。",
+      "own_name": "名称",
+      "own_save": "保存声音",
+      "screens_title": "按屏幕设置",
+      "screens_same": "与其他屏幕相同",
+      "screens_none": "目前没有可播放此声音且配有扬声器的屏幕。",
+      "volume": "音量",
       "volume_db": "{volume} dB",
-      "volume_saved": "Volume set to {volume} dB",
-      "test": "Test",
-      "test_hint": "Plays it on this screen now, the way it will for real",
-      "test_sent": "Playing it on the screen",
+      "volume_saved": "音量已设为 {volume} dB",
+      "test": "测试",
+      "test_hint": "立即在此屏幕上播放，效果与实际使用相同",
+      "test_sent": "正在屏幕上播放",
       "editor": {
-        "drop": "Drop a sound file here",
-        "drop_loop": "Any song or sound will do: you pick the part that rings, at most {seconds} seconds, with the pause you want before it rings again.",
-        "drop_once": "Any song or sound will do: you pick the part that plays, at most {seconds} seconds.",
-        "total": "{time} in all",
-        "other_file": "Another file",
-        "whole": "The whole file",
-        "part": "The part that plays",
-        "start": "Start",
-        "end": "End",
-        "of_most": "of at most {most} s",
-        "made": "What is done to the sound",
-        "no_bass": "Bass filtered out",
-        "soft_ends": "Soft ends",
-        "even_level": "Even volume",
-        "repeats": "Repeats"
+        "drop": "将声音文件拖到这里",
+        "drop_loop": "可以使用任意歌曲或声音。选择不超过 {seconds} 秒的铃声片段，再设置每次重播前的停顿。",
+        "drop_once": "可以使用任意歌曲或声音。选择不超过 {seconds} 秒的播放片段。",
+        "total": "总时长 {time}",
+        "other_file": "选择其他文件",
+        "whole": "完整文件",
+        "part": "播放片段",
+        "start": "开始",
+        "end": "结束",
+        "of_most": "最长 {most} 秒",
+        "made": "声音处理",
+        "no_bass": "滤除低音",
+        "soft_ends": "淡入淡出",
+        "even_level": "平衡音量",
+        "repeats": "循环播放"
       }
     },
     "updates_card": {
-      "title": "{n} updates for {screen}",
-      "one": "One build of {screen}.",
-      "one_build": "All of it in one build of {screen}.",
-      "firmware": "Firmware",
-      "away": "{screen} is offline. It can be updated once it is back.",
-      "go_all": "Update everything"
+      "title": "「{screen}」有 {n} 项更新",
+      "one": "为「{screen}」构建一次。",
+      "one_build": "「{screen}」的所有更新只需构建一次。",
+      "firmware": "固件",
+      "away": "「{screen}」已离线。恢复在线后即可更新。",
+      "go_all": "全部更新"
     },
     "build_room": {
-      "title": "This Home Assistant may be short of memory for a build",
-      "text": "It has {free} GB free, and a build needs about {need} GB. A build may fail or slow Home Assistant down. A build server on another computer avoids that, and so does updating the screen from ESPHome Device Builder on a computer.",
-      "server": "Build server"
+      "title": "此 Home Assistant 主机的内存可能不足以完成构建",
+      "text": "当前可用内存为 {free} GB，构建约需 {need} GB。构建可能失败或拖慢 Home Assistant。可使用另一台电脑上的构建服务器，或从电脑上的 ESPHome 设备构建器更新屏幕。",
+      "server": "构建服务器"
     },
     "history": {
-      "title": "Last {n} builds of this screen",
+      "title": "此屏幕最近 {n} 次构建",
       "by": {
-        "update": "Update",
-        "plugins": "Plugins",
-        "install": "Install",
-        "icons": "Icons",
-        "other": "Build"
+        "update": "更新",
+        "plugins": "插件",
+        "install": "安装",
+        "icons": "图标",
+        "other": "构建"
       }
     }
   }

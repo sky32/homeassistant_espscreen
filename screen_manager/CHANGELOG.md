@@ -1,5 +1,6 @@
 ## Unreleased
 
+- Filled in the remaining Chinese editor and add-on messages for settings, updates, builds, plugins, events and sounds.
 - Completed the Simplified and Traditional Chinese installation wizard, including the firmware preparation and flashing prompts.
 - Added Simplified and Traditional Chinese for the editor and add-on, including browser locales such as `zh-CN` and `zh-TW`. A standalone editor can select a language with `?lang=zh-Hans` or `?lang=zh-Hant`. Eligible 16 MB HA Panel S3 and Waveshare 4.3 builds can also display Simplified Chinese; other physical screens use English when Chinese is selected.
 - Added an experimental HA Panel S3 profile with a 480 × 320 ST7796 display and FT6336 touch. Its installer uses the fork's board package, components and fonts without changing other boards' sources.
