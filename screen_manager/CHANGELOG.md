@@ -1,5 +1,6 @@
 ## Unreleased
 
+- Added common bathroom-label characters such as 主卫 and 浴 to the Simplified Chinese screen font.
 - Expanded the Simplified Chinese screen font to 2,500 common Han characters plus all screen translation characters; the generated firmware image remains within the 16 MB boards' OTA slot.
 - Expanded the Simplified Chinese screen subset to 2,500 high-frequency Han characters plus all characters used by screen translations; compiled the firmware to verify it still fits the OTA slot.
 - Aligned Simplified Chinese glyphs with the Latin baseline on the screen and in the firmware preview.

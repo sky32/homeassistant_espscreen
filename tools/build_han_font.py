@@ -11,29 +11,33 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 HAN_LINE = re.compile(r'(?m)^  SCRIPT_GLYPHS_HAN: "([^"]*)"$')
 COMMON_HAN = 2500
-EXTRA_HAN = '卧厅'
+EXTRA_HAN = '卧厅主卫浴'
 
 def repertoire(core):
-    match = HAN_LINE.search(core)
-    if not match:
-        raise SystemExit('packages/core.yaml has no SCRIPT_GLYPHS_HAN list')
-    if match.group(1) == '${HAN_GLYPHS}':
-        data = json.loads((ROOT / 'screen_manager/translations/zh-Hans.json').read_text(encoding='utf-8'))
-        retained = set(data['_meta']['glyphs'])
-    else:
-        retained = set(match.group(1))
-    common = []
-    for lead in range(0xB0, 0xF8):
-        for trail in range(0xA1, 0xFF):
-            try:
-                char = bytes((lead, trail)).decode('gb2312')
-            except UnicodeDecodeError:
-                continue
-            if '\u4e00' <= char <= '\u9fff' and char not in common:
-                common.append(char)
-    if len(common) < COMMON_HAN:
-        raise SystemExit(f'GB2312 provides only {len(common)} common Han characters')
-    return ''.join(sorted(retained | set(common[:COMMON_HAN]) | set(EXTRA_HAN)) )
+    if not HAN_LINE.search(core):
+        raise SystemExit('packages/core.yaml has no SCRIPT_GLYPHS_HAN substitution')
+    data = json.loads((ROOT / 'screen_manager/translations/zh-Hans.json').read_text(encoding='utf-8'))
+    old = set(data['_meta']['glyphs'])
+
+    def texts(node):
+        if isinstance(node, dict):
+            return [text for value in node.values() for text in texts(value)]
+        if isinstance(node, list):
+            return [text for value in node for text in texts(value)]
+        return [node] if isinstance(node, str) else []
+
+    translated = ''.join(text for section in (data.get('screen', {}), data.get('addon', {}).get('screen', {}))
+                         for text in texts(section))
+    translated_han = {char for char in translated if '\u4e00' <= char <= '\u9fff'}
+    frequency_file = ROOT / 'tools/han_frequency.txt'
+    common = [line.strip() for line in frequency_file.read_text(encoding='utf-8').splitlines()
+              if line.strip() and not line.startswith('#')]
+    if len(common) < COMMON_HAN or len(set(common[:COMMON_HAN])) != COMMON_HAN:
+        raise SystemExit(f'{frequency_file} must list {COMMON_HAN} unique ranked Han characters')
+    if any(len(char) != 1 or not '\u4e00' <= char <= '\u9fff' for char in common[:COMMON_HAN]):
+        raise SystemExit(f'{frequency_file} contains a non-Han character in its first {COMMON_HAN} entries')
+    retained = {char for char in old if not '\u4e00' <= char <= '\u9fff'}
+    return ''.join(sorted(retained | translated_han | set(common[:COMMON_HAN]) | set(EXTRA_HAN)) )
 
 
 def build(source, output):

@@ -146,12 +146,13 @@ as Roboto has none. The add-on's `header_bar.GLYPHS` is the same set (`tests/tes
 drops the invisible characters an emoji carries, which LVGL would otherwise draw as a box. A character outside the set
 shows as a box on the screen, so a new one goes into all five lists and `GLYPHS` together.
 
-For Simplified Chinese builds, `TesseraHan-zh-Hans.otf` is a subset of Noto Sans CJK SC containing 2,500 high-frequency
-GB2312 Han characters plus every character used by screen translations (2,660 Han characters total). Generate it from
-the full licensed source with `python3 tools/build_han_font.py /path/to/NotoSansCJKsc-Regular.otf`. The script updates
-the font, firmware glyph list and translation metadata together. Its OTF source is 1.17 MiB; measure the compiled image,
-not the OTF, against the device's OTA slot. The ascender is aligned to Roboto because ESPHome measures extra glyphs
-from their source font but mixed lines use the base font's baseline.
+For Simplified Chinese builds, `TesseraHan-zh-Hans.otf` is a subset of Noto Sans CJK SC containing the 2,500 most
+frequent Han characters scored from a modern Chinese word-frequency corpus, plus every character used by screen
+translations and explicit room labels such as `卧室`, `主卫`, `卫浴` and `浴室`. The ranking and attribution are in
+`tools/han_frequency.txt` and `tools/han_frequency_sources.md`. Regenerate the subset from the full licensed source with
+`python3 tools/build_han_font.py /path/to/NotoSansCJKsc-Regular.otf`. The script updates the font, firmware glyph list and
+translation metadata together. Its OTF source is about 1.17 MiB; measure the compiled image against the OTA slot. The
+ascender is aligned to Roboto because ESPHome measures extra glyphs from their source font but mixed lines use its baseline.
 
 ## What the firmware does with it
 

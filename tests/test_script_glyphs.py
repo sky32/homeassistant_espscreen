@@ -61,7 +61,11 @@ class HanLetters(unittest.TestCase):
     def test_han_repertoire(self):
         letters = core_list('han')
         self.assertGreaterEqual(sum('\u4e00' <= char <= '\u9fff' for char in letters), 2500)
-        self.assertTrue(set('首页设置温度客厅卧室厨房电视空调天气今天现在公共') <= set(letters))
+        self.assertTrue(set('首页设置温度客厅卧室厨房主卫卫浴浴室电视空调天气今天现在公共') <= set(letters))
+        ranked = {line.strip() for line in (ROOT / 'tools/han_frequency.txt').read_text().splitlines()
+                  if line.strip() and not line.startswith('#')}
+        self.assertEqual(len(ranked), 2500)
+        self.assertTrue(ranked <= set(letters))
         self.assertEqual(set(letters), header_bar.SCRIPT_GLYPHS['han'])
         self.assertEqual(len(letters), len(set(letters)))
 
