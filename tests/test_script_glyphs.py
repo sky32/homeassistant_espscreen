@@ -25,8 +25,9 @@ TEXT_FONTS = ('headline', 'watch_value', 'label', 'sublabel', 'sublabel_big')
 
 
 def core_list(script):
+    if script == 'han':
+        return json.loads((ROOT / 'screen_manager/translations/zh-Hans.json').read_text(encoding='utf-8'))['_meta']['glyphs']
     return re.search(r'(?m)^  SCRIPT_GLYPHS_' + script.upper() + r': "([^"]*)"', CORE).group(1)
-
 
 class FirmwareLetters(unittest.TestCase):
     def test_the_app_and_the_firmware_name_the_same_letters(self):
@@ -59,6 +60,8 @@ class FirmwareLetters(unittest.TestCase):
 class HanLetters(unittest.TestCase):
     def test_han_repertoire(self):
         letters = core_list('han')
+        self.assertGreaterEqual(sum('\u4e00' <= char <= '\u9fff' for char in letters), 2500)
+        self.assertTrue(set('首页设置温度客厅卧室厨房电视空调天气今天现在公共') <= set(letters))
         self.assertEqual(set(letters), header_bar.SCRIPT_GLYPHS['han'])
         self.assertEqual(len(letters), len(set(letters)))
 

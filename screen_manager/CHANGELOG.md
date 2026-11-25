@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Expanded the Simplified Chinese screen font to 2,500 common Han characters plus all screen translation characters; the generated firmware image remains within the 16 MB boards' OTA slot.
+- Expanded the Simplified Chinese screen subset to 2,500 high-frequency Han characters plus all characters used by screen translations; compiled the firmware to verify it still fits the OTA slot.
 - Aligned Simplified Chinese glyphs with the Latin baseline on the screen and in the firmware preview.
 - Filled in the remaining Chinese editor and add-on messages for settings, updates, builds, plugins, events and sounds.
 - Completed the Simplified and Traditional Chinese installation wizard, including the firmware preparation and flashing prompts.
